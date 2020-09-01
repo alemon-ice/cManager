@@ -6,6 +6,7 @@ const app = Router();
 
 const schedulesController = new SchedulesController();
 
-app.get('/', schedulesController.index);
+app.get('/schedules', schedulesController.index);
+app.post('/schedules', schedulesController.create);
 
 export default app;

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { parseISO, isPast, startOfHour, isBefore, isAfter } from 'date-fns';
+import { parseISO, isPast, isBefore, isAfter } from 'date-fns';
 
 import connection from '../database/connection';
 
@@ -50,12 +50,12 @@ export default class SchedulesController {
           `${date}T${schedule.end_time}`,
         );
 
-        // if (scheduleStartDateTime === existingScheduleStartDateTime) {
-        //   console.log('teste 0');
+        // if (start_time === schedule.start_time) {
+        //   return true;
         // }
-        // FIXME refazer verificação
 
         if (
+          start_time === schedule.start_time ||
           (isAfter(scheduleStartDateTime, existingScheduleStartDateTime) &&
             isBefore(scheduleStartDateTime, existingScheduleEndDateTime)) ||
           (isAfter(scheduleEndDateTime, existingScheduleStartDateTime) &&

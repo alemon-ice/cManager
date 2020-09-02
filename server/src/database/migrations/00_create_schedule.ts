@@ -5,8 +5,10 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id').primary();
     table.string('title', 60).notNullable();
     table.string('description', 200);
-    table.dateTime('date_time').notNullable();
-    table.boolean('is_important').defaultTo(0).notNullable();
+    table.date('date').notNullable();
+    table.time('start_time').notNullable();
+    table.time('end_time').notNullable();
+    table.boolean('is_important').defaultTo(false).notNullable();
   });
 }
 

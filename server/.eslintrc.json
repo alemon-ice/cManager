@@ -23,6 +23,7 @@
     "prettier"
   ],
   "rules": {
+    "array-callback-return": "off",
     "camelcase": "off",
     "import/prefer-default-export": "off",
     "prettier/prettier": "error",

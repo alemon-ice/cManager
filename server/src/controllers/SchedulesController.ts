@@ -36,7 +36,7 @@ export default class SchedulesController {
       .where('date', date)
       .select('start_time', 'end_time');
 
-    const CheckIftimeIsValid = (
+    const checkIftimeIsValid = (
       schedulesArray: {
         start_time: string;
         end_time: string;
@@ -71,7 +71,7 @@ export default class SchedulesController {
     };
 
     if (schedulesOnDate.length > 0) {
-      const [timeIsValid] = CheckIftimeIsValid(schedulesOnDate);
+      const [timeIsValid] = checkIftimeIsValid(schedulesOnDate);
 
       if (timeIsValid) {
         await trx.rollback();
@@ -184,7 +184,29 @@ export default class SchedulesController {
 
       return response.status(200).send('Agendamento atualizado com sucesso');
     } catch (err) {
-      return response.send({ error: err });
+      return response.json({ error: err });
+    }
+  };
+
+  delete = async (request: Request, response: Response): Promise<Response> => {
+    const { id } = request.params;
+
+    const trx = await connection.transaction();
+
+    const checkIdExists = await trx('schedules').where({ id }).first();
+
+    if (!checkIdExists) {
+      await trx.rollback();
+      return response.send('O ID informado não existe na tabela.');
+    }
+
+    try {
+      await trx('schedules').where({ id }).del();
+
+      await trx.commit();
+      return response.status(200).send('Agendamento deletado com sucesso.');
+    } catch (err) {
+      return response.json({ error: err });
     }
   };
 }

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-import './styles.css'
 import addSvg from '../../../assets/images/icons/add-24px.ico'
 
-export interface ButtonProps {
-  styleButton?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'circle'
-}
+import './styles.css'
+
+import { ButtonProps } from '../../../models/ButtonModels'
 
 const Button: React.FC<ButtonProps> = ({
   styleButton = 'primary',

@@ -1,3 +1,3 @@
 export interface ButtonProps {
-  styleButton?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'circle'
+  styleButton?: 'primary' | 'secondary' | 'tertiary' | 'danger'
 }

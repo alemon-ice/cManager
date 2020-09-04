@@ -35,10 +35,3 @@
   color: #fff;
   border: 0;
 }
-
-.button-circle {
-  min-width: 35px;
-  width: 35px;
-  height: 35px;
-  border-radius: 50px;
-}

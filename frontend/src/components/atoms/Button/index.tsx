@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-
-import addSvg from '../../../assets/images/icons/add-24px.ico'
+import React from 'react'
 
 import './styles.css'
 
@@ -11,16 +9,9 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const [getChildren, setChildren] = useState(children)
-
-  useEffect(() => {
-    styleButton === 'circle'
-      ? setChildren(<img src={addSvg} alt="Novo agendamento" />)
-      : setChildren(children)
-  }, [])
   return (
     <button className={`default button-${styleButton}`} {...props}>
-      {getChildren}
+      {children}
     </button>
   )
 }

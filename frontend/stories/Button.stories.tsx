@@ -1,5 +1,5 @@
 import React from 'react'
-import { Meta } from '@storybook/react/types-6-0'
+import { Meta, Story } from '@storybook/react/types-6-0'
 
 import { Button } from '../src/components/atoms'
 
@@ -10,22 +10,16 @@ export default {
   component: Button
 } as Meta
 
-export const Primary: React.SFC<ButtonProps> = () => (
-  <Button>Primary Button</Button>
-)
+const Template: Story<ButtonProps> = args => <Button {...args} />
 
-export const Secondary: React.SFC<ButtonProps> = () => (
-  <Button styleButton="secondary">Secondary Button</Button>
-)
+export const Primary = Template.bind({})
+Primary.args = { children: 'Primary Button' }
 
-export const Tertiary: React.SFC<ButtonProps> = () => (
-  <Button styleButton="tertiary">Tertiary Button</Button>
-)
+export const Secondary = Template.bind({})
+Secondary.args = { styleButton: 'secondary', children: 'Secondary Button' }
 
-export const Danger: React.SFC<ButtonProps> = () => (
-  <Button styleButton="danger">Danger Button</Button>
-)
+export const Tertiary = Template.bind({})
+Tertiary.args = { styleButton: 'tertiary', children: 'Tertiary Button' }
 
-export const Circle: React.SFC<ButtonProps> = () => (
-  <Button styleButton="circle" />
-)
+export const Danger = Template.bind({})
+Danger.args = { styleButton: 'danger', children: 'Danger Button' }

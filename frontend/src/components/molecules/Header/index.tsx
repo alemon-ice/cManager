@@ -1,17 +1,16 @@
 import React from 'react'
 
+import { Container } from './styles'
 import { Button } from '../../atoms'
-
-import './styles.css'
 
 import cManagerLogo from '../../../assets/images/logo.png'
 
 const Header: React.FC = () => {
   return (
-    <div className="container">
+    <Container>
       <img src={cManagerLogo} alt="Logo" />
       <Button styleButton="secondary">Agendar tarefa</Button>
-    </div>
+    </Container>
   )
 }
 

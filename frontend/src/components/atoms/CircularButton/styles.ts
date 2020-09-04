@@ -20,4 +20,8 @@ export const Button = styled.button`
   img {
     max-width: 25px;
   }
+
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
 `

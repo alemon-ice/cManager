@@ -7,7 +7,15 @@ import { ButtonProps } from '../src/models/ButtonModels'
 
 export default {
   title: 'Button',
-  component: Button
+  component: Button,
+  parameters: {
+    backgrounds: {
+      values: [
+        { name: 'background', value: '#F0F0F0' },
+        { name: 'header', value: '#00C2CB' }
+      ]
+    }
+  }
 } as Meta
 
 const Template: Story<ButtonProps> = args => <Button {...args} />

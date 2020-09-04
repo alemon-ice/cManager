@@ -1,15 +1,14 @@
 import React from 'react'
 
 import { Container } from './styles'
-import { Button } from '../../atoms'
 
-import cManagerLogo from '../../../assets/images/logo.png'
-
-const Header: React.FC = () => {
+const Header: React.FC = ({ children }) => {
   return (
     <Container>
-      <img src={cManagerLogo} alt="Logo" />
-      <Button styleButton="secondary">Agendar tarefa</Button>
+      {/* <img src={cManagerLogo} alt="Logo" /> */}
+      {/* FIXME Logo provisória */}
+      <h1>cManager</h1>
+      {children}
     </Container>
   )
 }

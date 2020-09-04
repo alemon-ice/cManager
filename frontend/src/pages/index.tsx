@@ -1,7 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
 
-// import cManagerLogo from '../assets/logo.png'
+import { Button } from '../components/atoms'
+import { Header } from '../components/molecules'
 
 const Home: React.FC = () => {
   return (
@@ -12,8 +13,14 @@ const Home: React.FC = () => {
       </Head>
 
       <main>
-        {/* <img src={cManagerLogo} alt="cManager logo" /> */}
-        <h1>The project is configured.</h1>
+        <Header>
+          <Button
+            styleButton="secondary"
+            onClick={() => alert('Adicionar agendamento')}
+          >
+            Novo agendamento
+          </Button>
+        </Header>
       </main>
     </div>
   )

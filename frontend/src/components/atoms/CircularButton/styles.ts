@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const Button = styled.button`
-  background: #00c2cb;
-  color: #fff;
+  background: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.lightText};
   font: 700 16px Roboto, sans-serif;
 
   min-width: 35px;

@@ -1,7 +1,11 @@
 import React from 'react'
 import { Meta, Story } from '@storybook/react/types-6-0'
+import { ThemeProvider } from 'styled-components'
 
 import { Button } from '../src/components/atoms'
+
+import GlobalStyle from '../src/styles/global'
+import theme from '../src/styles/theme'
 
 import { ButtonProps } from '../src/models/ButtonModels'
 
@@ -18,7 +22,12 @@ export default {
   }
 } as Meta
 
-const Template: Story<ButtonProps> = args => <Button {...args} />
+const Template: Story<ButtonProps> = args => (
+  <ThemeProvider theme={theme}>
+    <Button {...args} />
+    <GlobalStyle />
+  </ThemeProvider>
+)
 
 export const Primary = Template.bind({})
 Primary.args = { children: 'Primary Button' }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './styles.css'
+import { StyledButton } from './styles'
 
 import { ButtonProps } from '../../../models/ButtonModels'
 
@@ -10,9 +10,9 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button className={`default button-${styleButton}`} {...props}>
+    <StyledButton className={`default button-${styleButton}`} {...props}>
       {children}
-    </button>
+    </StyledButton>
   )
 }
 

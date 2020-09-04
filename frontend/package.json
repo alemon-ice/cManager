@@ -12,6 +12,7 @@
   "dependencies": {
     "next": "9.5.2",
     "next-images": "^1.4.1",
+    "polished": "^3.6.6",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "styled-components": "^5.1.1"

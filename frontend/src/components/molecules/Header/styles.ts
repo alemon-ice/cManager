@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  background: #00c2cb;
+  background: ${props => props.theme.colors.primary};
 
   width: 100vw;
-  height: 10vh;
+  height: 8vh;
 
   display: flex;
   flex-direction: row;
@@ -12,10 +12,15 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 10%;
+  padding: 0 5vw;
 
   img {
-    height: 10vh;
+    height: 8vh;
+  }
+
+  /* FIXME Logo provisória */
+  h1 {
+    color: #fff;
   }
 
   @media (max-width: 1024px) {

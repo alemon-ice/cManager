@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 6fr 3fr;
+  grid-column-gap: 3%;
 
   width: 100vw;
   height: 92vh;
@@ -12,13 +13,13 @@ export const Container = styled.div`
 
   padding: 3%;
 
-  & div {
-    margin-bottom: 3%;
-    margin-left: 3%;
+  &:nth-child() {
+    background: red;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 900px) {
     & {
+      display: flex;
       flex-direction: column;
 
       padding: 6%;
@@ -31,30 +32,12 @@ export const Container = styled.div`
   }
 `;
 
-export const CalendarContainers = styled.div`
-  width: 100%;
-  height: 100px; /* FIXME */
+export const CalendarContainer = styled.div`
+  /* min-width: 100%; */
+  /* min-height: 100%; */
 
   border-radius: 12px;
   box-shadow: 1px 1.5px #CCC;
 
   background: #FFF;
-
-  & div {
-    margin: 0;
-  }
-`;
-
-export const ScheduleHeader = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  font-size: 60%;
-
-  width: 100%;
-  height: 40%;
-
-  border-radius: 12px 12px 0 0;
-  border-bottom: 0.1px solid #CCC;
 `;

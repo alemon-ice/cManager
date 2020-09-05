@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 import api from 'services/api'
 
-import { Container, CalendarContainers, ScheduleHeader } from './styles'
+import { Container, CalendarContainer } from './styles'
 
 import { Button, CircularButton } from 'components/atoms';
 import { Header } from 'components/molecules';
+import { Schedules } from 'components/organisms';
 
-import { ScheduleData, ScheduleDataSent } from 'models/ScheduleModels';
+import { ScheduleData } from 'models/ScheduleModels';
 
 const Home: React.FC = () => {
-  const [getData, setData] = useState<ScheduleData>();
+  const [getData, setData] = useState<ScheduleData[]>();
+  const [getContent, setContent] = useState<JSX.Element>();
 
   useEffect(() => {
     const getData = async () => {
@@ -20,8 +22,52 @@ const Home: React.FC = () => {
     getData();
   }, [])
 
+  console.log(getData)
+
+  const data = [
+    {
+      date: "2020-09-03",
+      description: "Reunião importante",
+      end_time: "18:00",
+      id: 5,
+      is_important: 1,
+      start_time: "16:00",
+      title: "Reunião",
+    },
+    {
+      date: "2020-09-03",
+      description: "Reunião importante",
+      end_time: "18:00",
+      id: 5,
+      is_important: 1,
+      start_time: "16:00",
+      title: "Avaliação de Inglês",
+    },
+    {
+      date: "2020-09-03",
+      description: "Reunião importante",
+      end_time: "18:00",
+      id: 5,
+      is_important: 1,
+      start_time: "16:00",
+      title: "Reunião",
+    },
+    {
+      date: "2020-09-03",
+      description: "Reunião importante",
+      end_time: "18:00",
+      id: 5,
+      is_important: 1,
+      start_time: "16:00",
+      title: "Reunião",
+    },
+  ]
+
   useEffect(() => {
-    getData && console.log(getData)
+    getData
+      ? setContent(<Schedules schedules={getData} />)
+      : setContent(<Schedules schedules={data} />)
+    // : setContent(<p>Carregando...</p>)
   }, [getData])
 
   const handleAddSchedule = () => {
@@ -36,12 +82,12 @@ const Home: React.FC = () => {
       </Header>
 
       <Container>
-        <CalendarContainers />
-        <CalendarContainers>
-          <ScheduleHeader>
-            <h1>17 de agosto</h1>
-          </ScheduleHeader>
-        </CalendarContainers>
+        <CalendarContainer />
+        <CalendarContainer>
+          {
+            getContent
+          }
+        </CalendarContainer>
       </Container>
 
       <CircularButton icon="add" onClick={handleAddSchedule} />

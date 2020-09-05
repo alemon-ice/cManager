@@ -29,7 +29,7 @@ export const Button = styled.button`
     max-width: 25px;
   }
 
-  position: absolute;
+  position: fixed;
   right: 25px;
   bottom: 25px;
 

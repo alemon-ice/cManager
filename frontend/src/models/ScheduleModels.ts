@@ -1,7 +1,7 @@
 export interface ScheduleData {
   id: number;
   title: string;
-  description: string;
+  description?: string;
   date: string;
   end_time: string;
   start_time: string;
@@ -10,7 +10,7 @@ export interface ScheduleData {
 
 export interface ScheduleDataSent {
   title: string;
-  description: string;
+  description?: string;
   date: string;
   end_time: string;
   start_time: string;

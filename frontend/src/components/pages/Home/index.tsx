@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Container, CalendarContainers } from './styles'
+
 import { Button, CircularButton } from 'components/atoms';
 import { Header } from 'components/molecules';
 
@@ -14,6 +16,11 @@ const Home: React.FC = () => {
           Novo agendamento
         </Button>
       </Header>
+
+      <Container>
+        <CalendarContainers />
+        <CalendarContainers />
+      </Container>
 
       <CircularButton icon="add" onClick={handleAddSchedule} />
     </>

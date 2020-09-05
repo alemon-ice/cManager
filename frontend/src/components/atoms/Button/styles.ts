@@ -1,10 +1,10 @@
-import styled from 'styled-components'
-import { lighten } from 'polished'
+import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export const StyledButton = styled.button`
   &.default {
-    background: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.lightText};
+    background: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.lightText};
     font: 700 16px Roboto, sans-serif;
 
     min-width: 150px;
@@ -20,7 +20,7 @@ export const StyledButton = styled.button`
   }
 
   &:hover {
-    background: ${props => lighten(0.1, props.theme.colors.primary)};
+    background: ${(props) => lighten(0.1, props.theme.colors.primary)};
     transition: 0.5s;
     cursor: pointer;
   }
@@ -31,18 +31,18 @@ export const StyledButton = styled.button`
   }
 
   &.button-secondary {
-    border: 1px solid ${props => props.theme.colors.lightText};
+    border: 1px solid ${(props) => props.theme.colors.lightText};
   }
 
   &.button-tertiary {
-    background: ${props => props.theme.colors.tertiary};
-    color: ${props => props.theme.colors.text};
+    background: ${(props) => props.theme.colors.tertiary};
+    color: ${(props) => props.theme.colors.text};
     font: 400 16px Roboto, sans-serif;
   }
 
   &.button-danger {
-    background: ${props => props.theme.colors.danger};
-    color: ${props => props.theme.colors.lightText};
+    background: ${(props) => props.theme.colors.danger};
+    color: ${(props) => props.theme.colors.lightText};
     border: 0;
   }
-`
+`;

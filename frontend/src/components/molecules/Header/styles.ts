@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary};
 
   width: 100vw;
   height: 8vh;
@@ -18,12 +18,7 @@ export const Container = styled.div`
     height: 8vh;
   }
 
-  /* FIXME Logo provisória */
-  h1 {
-    color: #fff;
-  }
-
-  @media (max-width: 1024px) {
+  @media (max-width: 600px) {
     & .button-secondary {
       display: none;
     }
@@ -33,4 +28,4 @@ export const Container = styled.div`
       padding: 0 10%;
     }
   }
-`
+`;

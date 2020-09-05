@@ -1,3 +1,4 @@
 export interface CircularButtonProps {
-  icon: 'add'
+  icon: string;
+  onClick?: () => void;
 }

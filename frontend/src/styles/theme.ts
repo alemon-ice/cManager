@@ -6,8 +6,8 @@ const theme = {
     lightText: '#fff',
     primary: '#00C2CB',
     tertiary: '#f0f0f0',
-    danger: '#ff4d4d'
-  }
-}
+    danger: '#ff4d4d',
+  },
+};
 
-export default theme
+export default theme;

@@ -50,10 +50,6 @@ export default class SchedulesController {
           `${date}T${schedule.end_time}`,
         );
 
-        // if (start_time === schedule.start_time) {
-        //   return true;
-        // }
-
         if (
           start_time === schedule.start_time ||
           (isAfter(scheduleStartDateTime, existingScheduleStartDateTime) &&
@@ -89,13 +85,11 @@ export default class SchedulesController {
     };
 
     try {
-      const [scheduleId] = await trx('schedules')
-        .insert(schedule)
-        .returning('id');
+      await trx('schedules').insert(schedule);
 
       await trx.commit();
 
-      return response.status(201).json({ id: scheduleId });
+      return response.status(201);
     } catch (err) {
       return response.send({ error: err });
     }

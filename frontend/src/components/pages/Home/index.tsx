@@ -13,61 +13,67 @@ import { ScheduleData } from 'models/ScheduleModels';
 const Home: React.FC = () => {
   const [getData, setData] = useState<ScheduleData[]>();
   const [getContent, setContent] = useState<JSX.Element>();
+  const [getTitleDate, setTitleDate] = useState('');
+
+  const formatMonth = (month: string) => {
+    switch (month) {
+      case '01':
+        return 'Janeiro';
+      case '02':
+        return 'Fevereiro';
+      case '03':
+        return 'Março';
+      case '04':
+        return 'Abril';
+      case '05':
+        return 'Maio';
+      case '06':
+        return 'Junho';
+      case '07':
+        return 'julho';
+      case '08':
+        return 'Agosto';
+      case '09':
+        return 'Setembro';
+      case '10':
+        return 'Outubro';
+      case '11':
+        return 'Novembro';
+      case '12':
+        return 'Dezembro';
+    }
+  }
+
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+
+    const day = currentDate.getDate().toString();
+    const formatedDay = (day.length === 1) ? '0' + day : day;
+    const month = (currentDate.getMonth() + 1).toString();
+    const formatedMonth = (month.length === 1) ? '0' + month : month;
+    const formatedYear = currentDate.getFullYear();
+
+    const stringMonth = formatMonth(formatedMonth);
+
+    const title = `${formatedDay} de ${stringMonth} de ${formatedYear}`
+    setTitleDate(title);
+
+    return `${formatedYear}-${formatedMonth}-${formatedDay}`
+  }
 
   useEffect(() => {
+    const currentDate = getCurrentDate();
     const getData = async () => {
-      const data = await api.get('schedules')
+      const data = await api.get(`schedules?date=${currentDate}`);
       data && setData(data.data);
     }
     getData();
-  }, [])
-
-  console.log(getData)
-
-  const data = [
-    {
-      date: "2020-09-03",
-      description: "Reunião importante",
-      end_time: "18:00",
-      id: 5,
-      is_important: 1,
-      start_time: "16:00",
-      title: "Reunião",
-    },
-    {
-      date: "2020-09-03",
-      description: "Reunião importante",
-      end_time: "18:00",
-      id: 5,
-      is_important: 1,
-      start_time: "16:00",
-      title: "Avaliação de Inglês",
-    },
-    {
-      date: "2020-09-03",
-      description: "Reunião importante",
-      end_time: "18:00",
-      id: 5,
-      is_important: 1,
-      start_time: "16:00",
-      title: "Reunião",
-    },
-    {
-      date: "2020-09-03",
-      description: "Reunião importante",
-      end_time: "18:00",
-      id: 5,
-      is_important: 1,
-      start_time: "16:00",
-      title: "Reunião",
-    },
-  ]
+  }, []);
 
   useEffect(() => {
     getData
-      ? setContent(<Schedules schedules={getData} />)
-      : setContent(<Schedules schedules={data} />)
-    // : setContent(<p>Carregando...</p>)
+      ? setContent(<Schedules title={getTitleDate} schedules={getData} />)
+      : setContent(<div className="message"><p>Carregando agendamentos...</p></div>)
   }, [getData])
 
   const handleAddSchedule = () => {

@@ -29,3 +29,9 @@ export const ScheduleList = styled.div`
   margin: 0;
   padding: 0 7% 7%;
 `;
+
+export const NoDate = styled.p`
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+`;

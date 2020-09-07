@@ -11,26 +11,36 @@ interface ScheduleItemProps {
 
 const ScheduleItem: React.FC<ScheduleItemProps> = ({ itemData }) => {
   const [schedule, setSchedule] = useState<ScheduleData>();
+  const [getShowDetails, setShowDetails] = useState<boolean>(true);
 
   useEffect(() => {
     itemData && setSchedule(itemData);
-  }, []);
+  }, [itemData]);
+
+  const showDetails = (scheduleId?: number) => {
+    console.log(scheduleId);
+    setShowDetails(!getShowDetails);
+  }
 
   return (
-    <Container>
-      <div>
+    <>
+      <Container>
         <div>
-          <p>das {schedule?.start_time}</p>
-          <p>às {schedule?.end_time}</p>
+          <div>
+            <p>das {schedule?.start_time}</p>
+            <p>às {schedule?.end_time}</p>
+          </div>
         </div>
-      </div>
-      <div>
-        <h2>{schedule?.title}</h2>
-      </div>
-      <div>
-        <img src={addSvg} alt="Novo agendamento" /> {/* FIXME ícone provisório */}
-      </div>
-    </Container>
+        <div>
+          <h2>{schedule?.title}</h2>
+        </div>
+        <div>
+          <button type="button" onClick={() => showDetails(schedule?.id)}>
+            <img src={addSvg} alt="Novo agendamento" /> {/* FIXME ícone provisório */}
+          </button>
+        </div>
+      </Container>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+&:not(.showDetails) {
   display: grid;
   grid-template-columns: 4fr 5fr 2fr;
 
@@ -28,11 +29,20 @@ export const Container = styled.div`
       justify-content: center;
       align-items: flex-end;
     }
+
+    button {
+      width: 100%;
+      height: 100%;
+
+      background: #FFF;
+      
+      border: 0;
+    }
   }
 
   width: 100%;
-  height: 100px;
 
+  padding: 6% 0;
   margin-bottom: 7%;
 
   &:first-child {
@@ -48,4 +58,5 @@ export const Container = styled.div`
     }
     margin-bottom: 3%;
   }
+}
 `;

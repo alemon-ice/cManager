@@ -7,9 +7,6 @@ export const StyledButton = styled.button`
     color: ${(props) => props.theme.colors.lightText};
     font: 700 16px Roboto, sans-serif;
 
-    min-width: 150px;
-    height: 35px;
-
     padding: 5px 15px;
     border-radius: 6px;
     border: 0;

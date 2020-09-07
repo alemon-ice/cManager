@@ -33,11 +33,17 @@ export const Container = styled.div`
 `;
 
 export const CalendarContainer = styled.div`
-  /* min-width: 100%; */
-  /* min-height: 100%; */
-
   border-radius: 12px;
   box-shadow: 1px 1.5px #CCC;
 
   background: #FFF;
+
+  .message {
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;

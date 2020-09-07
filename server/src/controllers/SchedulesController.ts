@@ -5,7 +5,9 @@ import connection from '../database/connection';
 
 export default class SchedulesController {
   index = async (request: Request, response: Response): Promise<Response> => {
-    const schedules = await connection('schedules').select('*');
+    const { date } = request.query;
+
+    const schedules = await connection('schedules').where({ date }).select('*');
 
     return response.json(schedules);
   };

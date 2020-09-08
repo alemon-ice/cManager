@@ -6,13 +6,14 @@ import { Container, CalendarContainer } from './styles'
 
 import { Button, CircularButton } from 'components/atoms';
 import { Header } from 'components/molecules';
-import { Schedules } from 'components/organisms';
+import { Calendar, Schedules } from 'components/organisms';
 
 import { ScheduleData } from 'models/ScheduleModels';
 
 const Home: React.FC = () => {
   const [getData, setData] = useState<ScheduleData[]>();
   const [getContent, setContent] = useState<JSX.Element>();
+  const [getCurrentDate, setCurrentDate] = useState<Date>();
   const [getTitleDate, setTitleDate] = useState('');
 
   const formatMonth = (month: string) => {
@@ -44,14 +45,14 @@ const Home: React.FC = () => {
     }
   }
 
-  const getCurrentDate = () => {
-    const currentDate = new Date();
+  const formatCurrentDate = (date: Date) => {
+    setCurrentDate(date);
 
-    const day = currentDate.getDate().toString();
+    const day = date.getDate().toString();
     const formatedDay = (day.length === 1) ? '0' + day : day;
-    const month = (currentDate.getMonth() + 1).toString();
+    const month = (date.getMonth() + 1).toString();
     const formatedMonth = (month.length === 1) ? '0' + month : month;
-    const formatedYear = currentDate.getFullYear();
+    const formatedYear = date.getFullYear();
 
     const stringMonth = formatMonth(formatedMonth);
 
@@ -61,13 +62,16 @@ const Home: React.FC = () => {
     return `${formatedYear}-${formatedMonth}-${formatedDay}`
   }
 
+  const getDates = async (formatedDate: string) => {
+    const data = await api.get(`schedules?date=${formatedDate}`);
+    data && setData(data.data);
+  }
+
   useEffect(() => {
-    const currentDate = getCurrentDate();
-    const getData = async () => {
-      const data = await api.get(`schedules?date=${currentDate}`);
-      data && setData(data.data);
-    }
-    getData();
+    const currentDate = new Date();
+    const formatedCurrentDate = formatCurrentDate(currentDate);
+
+    getDates(formatedCurrentDate);
   }, []);
 
   useEffect(() => {
@@ -76,9 +80,16 @@ const Home: React.FC = () => {
       : setContent(<div className="message"><p>Carregando agendamentos...</p></div>)
   }, [getData])
 
+  const selectDate = (date: any) => {
+    const formatedDate = formatCurrentDate(date);
+
+    getDates(formatedDate)
+  }
+
   const handleAddSchedule = () => {
     alert('Adicionar agendamento');
   };
+
   return (
     <>
       <Header>
@@ -88,7 +99,13 @@ const Home: React.FC = () => {
       </Header>
 
       <Container>
-        <CalendarContainer />
+        <CalendarContainer>
+          <Calendar
+            onChange={date => selectDate(date)}
+            value={getCurrentDate}
+            calendarType="ISO 8601"
+          />
+        </CalendarContainer>
         <CalendarContainer>
           {
             getContent

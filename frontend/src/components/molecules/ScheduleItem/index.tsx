@@ -18,7 +18,6 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({ itemData }) => {
   }, [itemData]);
 
   const showDetails = (scheduleId?: number) => {
-    console.log(scheduleId);
     setShowDetails(!getShowDetails);
   }
 

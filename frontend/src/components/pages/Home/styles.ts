@@ -33,6 +33,8 @@ export const Container = styled.div`
 `;
 
 export const CalendarContainer = styled.div`
+  max-height: 100%;
+
   border-radius: 12px;
   box-shadow: 1px 1.5px #CCC;
 

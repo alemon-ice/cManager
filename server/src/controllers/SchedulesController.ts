@@ -91,7 +91,7 @@ export default class SchedulesController {
 
       await trx.commit();
 
-      return response.status(201);
+      return response.status(201).send('Agendamento criado com sucesso.');
     } catch (err) {
       return response.send({ error: err });
     }

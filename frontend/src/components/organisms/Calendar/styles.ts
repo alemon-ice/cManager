@@ -165,6 +165,7 @@ export const ReactCalendar = styled(Calendar)`
     background-color: #e6e6e6;
   }
 
+  /* Calendar Header and Day Calendar */
   @media (max-width: 900px) {
     & > .react-calendar__navigation button {
       font-size: 100%;
@@ -174,6 +175,7 @@ export const ReactCalendar = styled(Calendar)`
     }
   }
 
+  /* Calendar Header */
   @media (max-width: 600px) {
     & > .react-calendar__navigation button {
       font-size: 75%;

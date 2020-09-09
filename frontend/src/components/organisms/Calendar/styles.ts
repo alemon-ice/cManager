@@ -164,4 +164,19 @@ export const ReactCalendar = styled(Calendar)`
   .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #e6e6e6;
   }
+
+  @media (max-width: 900px) {
+    & > .react-calendar__navigation button {
+      font-size: 100%;
+    }
+    .react-calendar__tile {
+      max-height: 10vw;
+    }
+  }
+
+  @media (max-width: 600px) {
+    & > .react-calendar__navigation button {
+      font-size: 75%;
+    }
+  }
 `;

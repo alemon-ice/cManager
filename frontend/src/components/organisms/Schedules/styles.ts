@@ -8,8 +8,8 @@ export const ScheduleHeader = styled.div`
   font-size: 60%;
 
   width: 100%;
-  height: 20%;
-  max-height: 50px;
+  height: 6vh;
+  min-height: 40px;
 
   margin: 0;
 

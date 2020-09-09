@@ -6,16 +6,12 @@ export const Container = styled.div`
   grid-column-gap: 3%;
 
   width: 100vw;
-  height: 92vh;
+  height: 90vh;
 
   min-width: 100%;
   min-height: 100%;
 
   padding: 3%;
-
-  &:nth-child() {
-    background: red;
-  }
 
   @media (max-width: 900px) {
     & {

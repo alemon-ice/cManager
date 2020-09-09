@@ -14,7 +14,7 @@ export const ReactCalendar = styled(Calendar)`
   } */
 
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   margin: 0;
 
   /* & > .react-calendar--doubleView {
@@ -52,7 +52,7 @@ export const ReactCalendar = styled(Calendar)`
     /* height:44px;
     margin-bottom: 1em; */
 
-    height: 8%;
+    height: 6vh;
     background: ${props => props.theme.colors.primary};
 
     margin: 0;
@@ -88,7 +88,7 @@ export const ReactCalendar = styled(Calendar)`
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 0.75em;
+    font-size: 1em;
 
     display: flex;
     flex-direction: row;
@@ -97,7 +97,7 @@ export const ReactCalendar = styled(Calendar)`
 
     div {
       margin: 0;
-      margin: 2% 0;
+      margin: 0 0 2%;
 
       abbr {
         text-decoration: none;
@@ -135,7 +135,7 @@ export const ReactCalendar = styled(Calendar)`
     background: none;
 
     height: 100px;
-    max-height: 100%;
+    /* max-height: 100%; */
     border-radius: 3px;
     border: 0.5px solid #CCC;
   }

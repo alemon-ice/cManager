@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import api from 'services/api'
+import { useFetch } from 'hooks/useFetch';
 
 import { Container, CalendarContainer } from './styles'
 
@@ -11,6 +11,7 @@ import { Calendar, Schedules } from 'components/organisms';
 import { ScheduleData } from 'models/ScheduleModels';
 
 const Home: React.FC = () => {
+  const [getFormatedDate, setFormatedDate] = useState<string>();
   const [getData, setData] = useState<ScheduleData[]>();
   const [getContent, setContent] = useState<JSX.Element>();
   const [getCurrentDate, setCurrentDate] = useState<Date>();
@@ -46,6 +47,8 @@ const Home: React.FC = () => {
     }
   }
 
+  const { data } = useFetch<ScheduleData[]>(`http://192.168.2.42:3333/schedules?date=${getFormatedDate}`);
+
   const formatCurrentDate = (date: Date) => {
     setCurrentDate(date);
 
@@ -63,28 +66,23 @@ const Home: React.FC = () => {
     return `${formatedYear}-${formatedMonth}-${formatedDay}`
   }
 
-  const getDates = async (formatedDate: string) => {
-    const data = await api.get(`schedules?date=${formatedDate}`);
-    data && setData(data.data);
-  }
-
   useEffect(() => {
     const currentDate = new Date();
     const formatedCurrentDate = formatCurrentDate(currentDate);
 
-    getDates(formatedCurrentDate);
+    setFormatedDate(formatedCurrentDate);
   }, []);
 
   useEffect(() => {
-    getData
-      ? setContent(<Schedules title={getTitleDate} schedules={getData} />)
+    data
+      ? setContent(<Schedules title={getTitleDate} schedules={data} />)
       : setContent(<div className="message"><p>Carregando agendamentos...</p></div>)
-  }, [getData])
+  }, [data])
 
   const selectDate = (date: any) => {
     const formatedDate = formatCurrentDate(date);
 
-    getDates(formatedDate)
+    setFormatedDate(formatedDate);
   }
 
   const handleAddSchedule = () => {

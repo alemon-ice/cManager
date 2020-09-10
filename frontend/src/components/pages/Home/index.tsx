@@ -5,7 +5,7 @@ import api from 'services/api'
 import { Container, CalendarContainer } from './styles'
 
 import { Button, CircularButton } from 'components/atoms';
-import { Header } from 'components/molecules';
+import { Header, Modal } from 'components/molecules';
 import { Calendar, Schedules } from 'components/organisms';
 
 import { ScheduleData } from 'models/ScheduleModels';
@@ -15,6 +15,7 @@ const Home: React.FC = () => {
   const [getContent, setContent] = useState<JSX.Element>();
   const [getCurrentDate, setCurrentDate] = useState<Date>();
   const [getTitleDate, setTitleDate] = useState('');
+  const [getIsModalVisible, setIsModalVisible] = useState(true);
 
   const formatMonth = (month: string) => {
     switch (month) {
@@ -87,7 +88,7 @@ const Home: React.FC = () => {
   }
 
   const handleAddSchedule = () => {
-    alert('Adicionar agendamento');
+    setIsModalVisible(!getIsModalVisible);
   };
 
   return (
@@ -114,6 +115,9 @@ const Home: React.FC = () => {
       </Container>
 
       <CircularButton icon="add" onClick={handleAddSchedule} />
+      {
+        getIsModalVisible && <Modal title="Novo agendamento" content="Formulário" setIsModalVisible={setIsModalVisible} />
+      }
     </>
   );
 };

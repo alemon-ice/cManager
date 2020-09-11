@@ -2,24 +2,24 @@ import React from 'react';
 
 import { Background, Container, Header, Body, Footer } from './styles';
 import { Button } from 'components/atoms';
+import { SchedulingRegisterForm } from 'components/molecules';
 
 import { ModalProps } from 'models/ModalModels';
 
 const Modal: React.FC<ModalProps> = ({ title, content, setIsModalVisible }) => {
   return (
     <Background>
+      <button className="close-modal" onClick={() => setIsModalVisible(false)}>X</button>
       <Container>
         <Header>
-          <div />
           <h4>{title}</h4>
-          <button onClick={() => setIsModalVisible(false)}>X</button>
         </Header>
         <Body>
-          {content}
+          <SchedulingRegisterForm />
         </Body>
         <Footer>
-          <Button styleButton="tertiary">cancelar</Button>
           <Button styleButton="primary">Agendar</Button>
+          <Button styleButton="tertiary" onClick={() => setIsModalVisible(false)}>cancelar</Button>
         </Footer>
       </Container>
     </Background>

@@ -5,14 +5,13 @@ import { useFetch } from 'hooks/useFetch';
 import { Container, CalendarContainer } from './styles'
 
 import { Button, CircularButton } from 'components/atoms';
-import { Header, Modal } from 'components/molecules';
+import { Header, Modal, SchedulingRegisterForm } from 'components/molecules';
 import { Calendar, Schedules } from 'components/organisms';
 
 import { ScheduleData } from 'models/ScheduleModels';
 
 const Home: React.FC = () => {
   const [getFormatedDate, setFormatedDate] = useState<string>();
-  const [getData, setData] = useState<ScheduleData[]>();
   const [getContent, setContent] = useState<JSX.Element>();
   const [getCurrentDate, setCurrentDate] = useState<Date>();
   const [getTitleDate, setTitleDate] = useState('');
@@ -47,7 +46,7 @@ const Home: React.FC = () => {
     }
   }
 
-  const { data } = useFetch<ScheduleData[]>(`http://192.168.2.42:3333/schedules?date=${getFormatedDate}`);
+  const { data } = useFetch<ScheduleData[]>(`http://192.168.100.7:3333/schedules?date=${getFormatedDate}`);
 
   const formatCurrentDate = (date: Date) => {
     setCurrentDate(date);
@@ -114,7 +113,7 @@ const Home: React.FC = () => {
 
       <CircularButton icon="add" onClick={handleAddSchedule} />
       {
-        getIsModalVisible && <Modal title="Novo agendamento" content="Formulário" setIsModalVisible={setIsModalVisible} />
+        getIsModalVisible && <Modal title="Novo agendamento" content={SchedulingRegisterForm} setIsModalVisible={setIsModalVisible} />
       }
     </>
   );

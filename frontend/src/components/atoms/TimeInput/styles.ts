@@ -4,20 +4,19 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
 
+  justify-content: space-between;
   align-items: center;
 
-  label {
-    width: 100px;
-
+  & label {
     font-size: 1.3rem;
     text-align: right;
-    
+
     margin-right: 1rem;
   }
 
-  input {
-    width: 300px;
+  & input {
     height: 100%;
+    width: 120px;
     max-height: 40px;
     
     background: #FFF;
@@ -33,20 +32,33 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 600px) {
-    flex-direction: column;
-    
-    width: 100%;
-    
-    & label {
-      text-align: left;
-      
-      width: 100%;
+  .start-time-label {
+    width: 100px;
+  }
 
-      margin: 0;
+  .end-time-label {
+    margin-left: 1rem;
+    width: calc(60px - 2rem);
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+
+    .start-time-label,
+    .end-time-label {
+      text-align: left;
+
+      width: 50%;
+
+      margin-right: 0.8rem;
     }
-    
-    & input {
+
+    .end-time-label {
+      width: 30%;
+      margin-left: 0.8rem;
+    }
+
+    input {
       width: 100%;
     }
   }

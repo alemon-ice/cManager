@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 import { InputProps } from 'models/InputModels';
 
-const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
+const DateInput: React.FC<InputProps> = ({ name, label, ...rest }) => {
   return (
     <Container>
       <label htmlFor={name}>{label}</label>
@@ -17,4 +17,4 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
   );
 }
 
-export default Input;
+export default DateInput;

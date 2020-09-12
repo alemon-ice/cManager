@@ -9,7 +9,9 @@ import { ModalProps } from 'models/ModalModels';
 const Modal: React.FC<ModalProps> = ({ title, content, setIsModalVisible }) => {
   return (
     <Background>
-      <button className="close-modal" onClick={() => setIsModalVisible(false)}>X</button>
+      <button className="close-modal" onClick={() => setIsModalVisible(false)}>
+        X{/* FIXME icon */}
+      </button>
       <Container>
         <Header>
           <h4>{title}</h4>

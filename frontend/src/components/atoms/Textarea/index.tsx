@@ -2,15 +2,15 @@ import React from 'react';
 
 import { Container } from './styles';
 
-import { InputProps } from 'models/InputModels';
+import { TextareaProps } from 'models/InputModels';
 
-const Input: React.FC<InputProps> = ({ name, label, placeholder, ...rest }) => {
+const Textarea: React.FC<TextareaProps> = ({ name, label, ...rest }) => {
   return (
     <Container>
       <label htmlFor={name}>{label}</label>
-      <textarea id={name} {...rest} placeholder={placeholder} />
+      <textarea id={name} {...rest} />
     </Container>
   );
 }
 
-export default Input;
+export default Textarea;

@@ -23,16 +23,46 @@ export const Container = styled.div`
   }
 
   input {
-  height: 100%;
-  width: 90px;
-  max-height: 40px;
-  
-  background: #FFF;
-  font-size: 1.3rem;
+    height: 100%;
+    width: 90px;
+    max-height: 40px;
+    
+    background: #FFF;
+    font-size: 1.3rem;
 
-  padding: 1rem;
-  border: 1px solid #CCC;
-  border-radius: 6px;
-  outline: 0;
-}
+    padding: 1rem;
+    border: 0.5px solid #CCC;
+    border-radius: 6px;
+    outline: 0;
+
+    &::-webkit-input-placeholder  {
+      color:#C0C0C0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    
+    width: 100%;
+    
+    label {
+      text-align: left;
+      
+      width: 100%;
+
+      margin: 0;
+    }
+    
+    .inputs {
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+    }
+
+    input + input {
+      margin-left: 1rem;
+    }
+  }
 `;

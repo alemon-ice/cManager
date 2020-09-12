@@ -7,4 +7,23 @@ export const Container = styled.div`
   align-items: center;
 
   width: 100%;
+  
+  & > * {
+    margin-top: 20px;
+  }
+
+  @media (max-width:600px) {
+    & > * {
+      margin-top: 20px;
+
+      label {
+        font-size: 1rem;
+        margin: 0 0 5px;
+      }
+
+      input, textarea {
+        font-size: 1rem;
+      }
+    }
+  }
 `;

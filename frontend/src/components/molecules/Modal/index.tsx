@@ -20,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({ title, content, setIsModalVisible }) => {
           <SchedulingRegisterForm />
         </Body>
         <Footer>
-          <Button styleButton="primary">Agendar</Button>
+          <Button type="submit" form="submit-scheduling" styleButton="primary">Agendar</Button>
           <Button styleButton="tertiary" onClick={() => setIsModalVisible(false)}>cancelar</Button>
         </Footer>
       </Container>

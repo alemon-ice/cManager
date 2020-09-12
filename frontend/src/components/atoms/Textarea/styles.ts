@@ -18,7 +18,7 @@ export const Container = styled.div`
 
   textarea {
     height: 100%;
-    width: 300px;
+    width: 350px;
     max-height: 100px;
     
     background: #FFF;

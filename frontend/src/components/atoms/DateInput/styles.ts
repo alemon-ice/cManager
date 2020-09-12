@@ -19,12 +19,12 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
 
-    width: 300px;
+    width: 350px;
   }
 
   input {
     height: 100%;
-    width: 90px;
+    width: 105px;
     max-height: 40px;
     
     background: #FFF;

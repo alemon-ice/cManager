@@ -6,7 +6,6 @@ import { Button } from './styles';
 
 const CircularButton: React.FC<CircularButtonProps> = ({
   icon,
-  onClick,
   ...props
 }) => {
   const [getChildren, setChildren] = useState<JSX.Element>();
@@ -18,7 +17,7 @@ const CircularButton: React.FC<CircularButtonProps> = ({
   }, [icon]);
 
   return (
-    <Button onClick={onClick} {...props}>
+    <Button {...props}>
       {getChildren}
     </Button>
   );

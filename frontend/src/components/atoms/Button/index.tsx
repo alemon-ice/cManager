@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ButtonProps } from 'models/ButtonModels';
 import { StyledButton } from './styles';
+
+import { ButtonProps } from 'models/ButtonModels';
 
 const Button: React.FC<ButtonProps> = ({
   styleButton = 'primary',
-  onClick,
   children,
   ...props
 }) => {
@@ -13,7 +13,6 @@ const Button: React.FC<ButtonProps> = ({
     <StyledButton
       className={`default button-${styleButton}`}
       {...props}
-      onClick={onClick}
     >
       {children}
     </StyledButton>

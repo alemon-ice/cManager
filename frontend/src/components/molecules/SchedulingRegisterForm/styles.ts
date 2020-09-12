@@ -8,12 +8,12 @@ export const Container = styled.div`
 
   width: 100%;
   
-  & > * {
+  form > * {
     margin-top: 20px;
   }
 
   @media (max-width:600px) {
-    & > * {
+    form > * {
       margin-top: 20px;
 
       label {

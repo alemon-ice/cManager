@@ -16,7 +16,7 @@ export const Container = styled.div`
 
   & input {
     height: 100%;
-    width: 120px;
+    width: 135px;
     max-height: 40px;
     
     background: #FFF;

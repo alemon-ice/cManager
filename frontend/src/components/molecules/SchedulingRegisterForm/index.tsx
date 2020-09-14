@@ -5,15 +5,16 @@ import api from 'services/api';
 import { Input, Textarea, DateInput, TimeInput } from 'components/atoms';
 import { Container } from './styles';
 
-import { ScheduleData } from 'models/ScheduleModels';
+import { ScheduleData, ScheduleDataSent } from 'models/ScheduleModels';
 
 interface SchedulingRegisterFormProps {
   scheduleId?: number;
   currentDate?: string;
   setIsModalVisible: (value: boolean) => void;
+  handleAddScheduling: (scheduleData: ScheduleDataSent, scheduleId?: number) => void;
 }
 
-const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ scheduleId, currentDate, setIsModalVisible }) => {
+const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ scheduleId, currentDate, setIsModalVisible, handleAddScheduling }) => {
   const [getScheduleData, setScheduleData] = useState<ScheduleData>();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -60,41 +61,23 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
     }
   }, [getScheduleData]);
 
-  const handleAddScheduling = async (e: FormEvent) => {
-    e.preventDefault();
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
 
-    try {
-      if (!scheduleId) {
-        await api.post('schedules', {
-          title,
-          description,
-          date: `${year}-${month}-${day}`,
-          start_time,
-          end_time,
-          is_important,
-        });
-      } else {
-        await api.put(`schedules/${scheduleId}`, {
-          title,
-          description,
-          date: `${year}-${month}-${day}`,
-          start_time,
-          end_time,
-          is_important,
-        });
-      }
-
-      setIsModalVisible(false);
-      alert('Agendamento salvo com sucesso.');  // FIXME criar mensagem estilizada
-    } catch (err) {
-      alert('Erro no seridor.');  // FIXME criar mensagem estilizada
-      console.log(err);
+    const schedule = {
+      title,
+      description,
+      date: `${year}-${month}-${day}`,
+      start_time,
+      end_time,
+      is_important,
     }
+    handleAddScheduling(schedule, scheduleId);
   }
 
   return (
     <Container>
-      <form id="submit-scheduling" onSubmit={handleAddScheduling}>
+      <form id="submit-scheduling" onSubmit={onSubmit}>
         <Input
           name="title"
           label="Título:"

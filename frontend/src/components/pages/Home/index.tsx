@@ -9,7 +9,7 @@ import { Button, CircularButton } from 'components/atoms';
 import { Header, Modal, SchedulingRegisterForm } from 'components/molecules';
 import { Calendar, Schedules } from 'components/organisms';
 
-import { ScheduleData } from 'models/ScheduleModels';
+import { ScheduleData, ScheduleDataSent } from 'models/ScheduleModels';
 
 const Home: React.FC = () => {
   const [getFormatedDate, setFormatedDate] = useState<string>();
@@ -18,7 +18,6 @@ const Home: React.FC = () => {
   const [getTitleDate, setTitleDate] = useState('');
   const [getIsModalVisible, setIsModalVisible] = useState(false);
   const [getSchedulingId, setSchedulingId] = useState<number>();
-  const [getSchedules, setSchedules] = useState<ScheduleData[] | []>([]);
 
   const formatMonth = (month: string) => {
     switch (month) {
@@ -89,6 +88,34 @@ const Home: React.FC = () => {
       : setContent(<div className="message"><p>Carregando agendamentos...</p></div>)
   }, [data]);
 
+  const handleAddScheduling = async (scheduleData: ScheduleDataSent, scheduleId?: number) => {
+
+    try {
+
+      if (!scheduleId) {
+        await api.post('schedules', scheduleData);
+      } else {
+        // api.put(`schedules/${scheduleId}`, schedule); FIXME resolver problema no backend
+
+        const updatedSchedule = data?.map(schedule => {
+          if (schedule.id === scheduleId) {
+            return { ...scheduleData, id: scheduleId }
+          }
+
+          return schedule;
+        });
+
+        mutate(updatedSchedule, false);
+      }
+
+      setIsModalVisible(false);
+      alert('Agendamento salvo com sucesso.');  // FIXME criar mensagem estilizada
+    } catch (err) {
+      alert('Erro no seridor.');  // FIXME criar mensagem estilizada
+      console.log(err);
+    }
+  }
+
   const selectDate = (date: any) => {
     const formatedDate = formatCurrentDate(date);
 
@@ -150,7 +177,7 @@ const Home: React.FC = () => {
 
       <CircularButton icon="add" onClick={handleAddSchedule} />
       {
-        getIsModalVisible && <Modal title="Novo agendamento" content={<SchedulingRegisterForm setIsModalVisible={setIsModalVisible} currentDate={getFormatedDate} scheduleId={getSchedulingId} />} setIsModalVisible={setIsModalVisible} />
+        getIsModalVisible && <Modal title="Novo agendamento" content={<SchedulingRegisterForm setIsModalVisible={setIsModalVisible} currentDate={getFormatedDate} scheduleId={getSchedulingId} handleAddScheduling={handleAddScheduling} />} setIsModalVisible={setIsModalVisible} />
       }
     </>
   );

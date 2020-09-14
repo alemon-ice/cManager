@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { ScheduleHeader, ScheduleList, NoDate } from './styles';
-import { ScheduleItem, Modal, SchedulingRegisterForm } from 'components/molecules';
+import { ScheduleItem } from 'components/molecules';
 
 import { ScheduleData } from 'models/ScheduleModels';
 

@@ -12,6 +12,24 @@ export default class SchedulesController {
     return response.json(schedules);
   };
 
+  getSchedule = async (
+    request: Request,
+    response: Response,
+  ): Promise<Response> => {
+    const { id } = request.params;
+
+    const trx = await connection.transaction();
+
+    const checkIdExists = await trx('schedules').where({ id }).first();
+
+    if (!checkIdExists) {
+      await trx.rollback();
+      return response.send('ID não encontrado.');
+    }
+
+    return response.json(checkIdExists);
+  };
+
   create = async (request: Request, response: Response): Promise<Response> => {
     const {
       title,

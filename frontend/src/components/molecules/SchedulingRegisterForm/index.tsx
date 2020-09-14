@@ -1,11 +1,20 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 
 import api from 'services/api';
 
 import { Input, Textarea, DateInput, TimeInput } from 'components/atoms';
 import { Container } from './styles';
 
-const SchedulingRegisterForm: React.FC = () => {
+import { ScheduleData } from 'models/ScheduleModels';
+
+interface SchedulingRegisterFormProps {
+  scheduleId?: number;
+  currentDate?: string;
+  setIsModalVisible: (value: boolean) => void;
+}
+
+const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ scheduleId, currentDate, setIsModalVisible }) => {
+  const [getScheduleData, setScheduleData] = useState<ScheduleData>();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [day, setDay] = useState('');
@@ -13,22 +22,71 @@ const SchedulingRegisterForm: React.FC = () => {
   const [year, setYear] = useState('');
   const [start_time, setStartTime] = useState('');
   const [end_time, setEndTime] = useState('');
-  const [is_important, setIsImportant] = useState(true);
+  const [is_important, setIsImportant] = useState(0);
+
+  const handleSplitDate = (date: string) => {
+    const splitDate = date.split('-');
+
+    return splitDate;
+  }
+
+  useEffect(() => {
+    const getScheduleData = async () => {
+      const scheduleData = await api.get(`schedules/${scheduleId}`);
+      setScheduleData(scheduleData.data);
+    }
+    scheduleId && getScheduleData();
+    if (currentDate) {
+      const splitDate = handleSplitDate(currentDate);
+
+      setDay(splitDate[2]);
+      setMonth(splitDate[1]);
+      setYear(splitDate[0]);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (getScheduleData) {
+      const splitDate = handleSplitDate(getScheduleData.date);
+
+      setTitle(getScheduleData.title);
+      getScheduleData.description && setDescription(getScheduleData.description);
+      setDay(splitDate[2]);
+      setMonth(splitDate[1]);
+      setYear(splitDate[0]);
+      setStartTime(getScheduleData.start_time);
+      setEndTime(getScheduleData.end_time);
+      setIsImportant(getScheduleData.is_important);
+    }
+  }, [getScheduleData]);
 
   const handleAddScheduling = (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      const message: Promise<any> = api.post('schedules', {
-        title,
-        description,
-        date: `${year}-${month}-${day}`,
-        start_time,
-        end_time,
-        is_important,
-      });
+      if (!scheduleId) {
+        api.post('schedules', {
+          title,
+          description,
+          date: `${year}-${month}-${day}`,
+          start_time,
+          end_time,
+          is_important,
+        });
+      } else {
+        console.log('ois')
+        api.put(`schedules/${scheduleId}`, {
+          title,
+          description,
+          date: `${year}-${month}-${day}`,
+          start_time,
+          end_time,
+          is_important,
+        });
+      }
 
-      console.log(message);
+      setIsModalVisible(false);
+      alert('Agendamento salvo com sucesso.');  // FIXME criar mensagem estilizada
     } catch (err) {
       console.log(err);
     }

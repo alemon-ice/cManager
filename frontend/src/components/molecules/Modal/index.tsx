@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Background, Container, Header, Body, Footer } from './styles';
 import { Button } from 'components/atoms';
-import { SchedulingRegisterForm } from 'components/molecules';
 
 import { ModalProps } from 'models/ModalModels';
 
@@ -10,14 +9,14 @@ const Modal: React.FC<ModalProps> = ({ title, content, setIsModalVisible }) => {
   return (
     <Background>
       <button className="close-modal" onClick={() => setIsModalVisible(false)}>
-        X{/* FIXME icon */}
+        X{/* FIXME icone provisório */}
       </button>
       <Container>
         <Header>
           <h4>{title}</h4>
         </Header>
         <Body>
-          <SchedulingRegisterForm />
+          {content}
         </Body>
         <Footer>
           <Button type="submit" form="submit-scheduling" styleButton="primary">Agendar</Button>

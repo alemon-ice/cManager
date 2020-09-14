@@ -15,7 +15,7 @@ const Home: React.FC = () => {
   const [getContent, setContent] = useState<JSX.Element>();
   const [getCurrentDate, setCurrentDate] = useState<Date>();
   const [getTitleDate, setTitleDate] = useState('');
-  const [getIsModalVisible, setIsModalVisible] = useState(true);
+  const [getIsModalVisible, setIsModalVisible] = useState(false);
 
   const formatMonth = (month: string) => {
     switch (month) {
@@ -113,7 +113,7 @@ const Home: React.FC = () => {
 
       <CircularButton icon="add" onClick={handleAddSchedule} />
       {
-        getIsModalVisible && <Modal title="Novo agendamento" content={SchedulingRegisterForm} setIsModalVisible={setIsModalVisible} />
+        getIsModalVisible && <Modal title="Novo agendamento" content={<SchedulingRegisterForm setIsModalVisible={setIsModalVisible} currentDate={getFormatedDate} />} setIsModalVisible={setIsModalVisible} />
       }
     </>
   );

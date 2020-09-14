@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useFetch } from 'hooks/useFetch';
+import api from 'services/api';
 
 import { Container, CalendarContainer } from './styles'
 
@@ -16,6 +17,8 @@ const Home: React.FC = () => {
   const [getCurrentDate, setCurrentDate] = useState<Date>();
   const [getTitleDate, setTitleDate] = useState('');
   const [getIsModalVisible, setIsModalVisible] = useState(false);
+  const [getSchedulingId, setSchedulingId] = useState<number>();
+  const [getSchedules, setSchedules] = useState<ScheduleData[] | []>([]);
 
   const formatMonth = (month: string) => {
     switch (month) {
@@ -46,7 +49,7 @@ const Home: React.FC = () => {
     }
   }
 
-  const { data } = useFetch<ScheduleData[]>(`http://192.168.100.7:3333/schedules?date=${getFormatedDate}`);
+  const { data, mutate } = useFetch<ScheduleData[]>(`schedules?date=${getFormatedDate}`);
 
   const formatCurrentDate = (date: Date) => {
     setCurrentDate(date);
@@ -74,9 +77,17 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     data
-      ? setContent(<Schedules title={getTitleDate} schedules={data} />)
+      ? setContent(
+        <Schedules
+          title={getTitleDate}
+          schedules={data}
+          handleCompleteSchedule={handleCompleteSchedule}
+          handleEditSchedule={handleEditSchedule}
+          handleDeleteSchedule={handleDeleteSchedule}
+        />
+      )
       : setContent(<div className="message"><p>Carregando agendamentos...</p></div>)
-  }, [data])
+  }, [data]);
 
   const selectDate = (date: any) => {
     const formatedDate = formatCurrentDate(date);
@@ -87,6 +98,32 @@ const Home: React.FC = () => {
   const handleAddSchedule = () => {
     setIsModalVisible(!getIsModalVisible);
   };
+
+  const handleCompleteSchedule = (id?: number) => {
+    console.log(`tarefa de ID ${id} concluída`);
+  }
+
+  const handleEditSchedule = (id?: number) => {
+    id && setSchedulingId(id);
+    setIsModalVisible(!getIsModalVisible);
+  }
+
+  const handleDeleteSchedule = (id?: number) => {
+    const response = window.confirm('Deseja mesmo excluir este agendamento?');
+    console.log(response);
+
+    if (response) {
+      api.delete(`schedules/${id}`);
+
+      const updatedSchedulesList = data?.filter(schedule => {
+        if (schedule.id !== id) {
+          return schedule;
+        }
+      });
+
+      mutate(updatedSchedulesList, false);
+    }
+  }
 
   return (
     <>
@@ -113,7 +150,7 @@ const Home: React.FC = () => {
 
       <CircularButton icon="add" onClick={handleAddSchedule} />
       {
-        getIsModalVisible && <Modal title="Novo agendamento" content={<SchedulingRegisterForm setIsModalVisible={setIsModalVisible} currentDate={getFormatedDate} />} setIsModalVisible={setIsModalVisible} />
+        getIsModalVisible && <Modal title="Novo agendamento" content={<SchedulingRegisterForm setIsModalVisible={setIsModalVisible} currentDate={getFormatedDate} scheduleId={getSchedulingId} />} setIsModalVisible={setIsModalVisible} />
       }
     </>
   );

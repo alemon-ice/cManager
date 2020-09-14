@@ -39,6 +39,7 @@ export default class SchedulesController {
       end_time,
       is_important,
     } = request.body;
+    console.log(request.body);
 
     const trx = await connection.transaction();
 
@@ -109,7 +110,7 @@ export default class SchedulesController {
 
       await trx.commit();
 
-      return response.status(201).send('Agendamento criado com sucesso.');
+      return response.send('Agendamento criado com sucesso.');
     } catch (err) {
       return response.send({ error: err });
     }
@@ -196,7 +197,7 @@ export default class SchedulesController {
 
       await trx.commit();
 
-      return response.status(200).send('Agendamento atualizado com sucesso');
+      return response.send('Agendamento atualizado com sucesso');
     } catch (err) {
       return response.json({ error: err });
     }
@@ -218,7 +219,7 @@ export default class SchedulesController {
       await trx('schedules').where({ id }).del();
 
       await trx.commit();
-      return response.status(200).send('Agendamento deletado com sucesso.');
+      return response.send('Agendamento deletado com sucesso.');
     } catch (err) {
       return response.json({ error: err });
     }

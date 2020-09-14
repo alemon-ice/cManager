@@ -22,7 +22,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
   const [year, setYear] = useState('');
   const [start_time, setStartTime] = useState('');
   const [end_time, setEndTime] = useState('');
-  const [is_important, setIsImportant] = useState(0);
+  const [is_important, setIsImportant] = useState<boolean>(false);
 
   const handleSplitDate = (date: string) => {
     const splitDate = date.split('-');
@@ -56,16 +56,16 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
       setYear(splitDate[0]);
       setStartTime(getScheduleData.start_time);
       setEndTime(getScheduleData.end_time);
-      setIsImportant(getScheduleData.is_important);
+      setIsImportant(!!getScheduleData.is_important);
     }
   }, [getScheduleData]);
 
-  const handleAddScheduling = (e: FormEvent) => {
+  const handleAddScheduling = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
       if (!scheduleId) {
-        api.post('schedules', {
+        await api.post('schedules', {
           title,
           description,
           date: `${year}-${month}-${day}`,
@@ -74,8 +74,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
           is_important,
         });
       } else {
-        console.log('ois')
-        api.put(`schedules/${scheduleId}`, {
+        await api.put(`schedules/${scheduleId}`, {
           title,
           description,
           date: `${year}-${month}-${day}`,
@@ -88,6 +87,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
       setIsModalVisible(false);
       alert('Agendamento salvo com sucesso.');  // FIXME criar mensagem estilizada
     } catch (err) {
+      alert('Erro no seridor.');  // FIXME criar mensagem estilizada
       console.log(err);
     }
   }

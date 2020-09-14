@@ -5,7 +5,7 @@ export interface ScheduleData {
   date: string;
   end_time: string;
   start_time: string;
-  is_important: number;
+  is_important: boolean;
 }
 
 export interface ScheduleDataSent {
@@ -14,5 +14,5 @@ export interface ScheduleDataSent {
   date: string;
   end_time: string;
   start_time: string;
-  is_important: number;
+  is_important: boolean;
 }

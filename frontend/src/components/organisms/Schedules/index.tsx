@@ -9,7 +9,7 @@ interface SchedulesProps {
   title: string;
   schedules: ScheduleData[];
   handleCompleteSchedule: (id?: number) => void;
-  handleEditSchedule: (id?: number) => void;
+  handleEditSchedule: (schedule?: ScheduleData) => void;
   handleDeleteSchedule: (id?: number) => void;
 }
 

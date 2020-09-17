@@ -10,7 +10,7 @@ import { ScheduleData } from 'models/ScheduleModels';
 interface ScheduleItemProps {
   itemData: ScheduleData;
   handleCompleteSchedule: (id?: number) => void;
-  handleEditSchedule: (id?: number) => void;
+  handleEditSchedule: (schedule?: ScheduleData) => void;
   handleDeleteSchedule: (id?: number) => void;
 }
 
@@ -60,7 +60,7 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
               }
               <div>
                 <Button styleButton="primary" onClick={() => handleCompleteSchedule(getSchedule?.id)}>Concluída</Button>
-                <Button styleButton="secondary" onClick={() => handleEditSchedule(getSchedule?.id)}>Editar</Button>
+                <Button styleButton="secondary" onClick={() => handleEditSchedule(getSchedule)}>Editar</Button>
                 <Button styleButton="danger" onClick={() => handleDeleteSchedule(getSchedule?.id)}>Excluir</Button>
               </div>
             </Details>

@@ -197,6 +197,7 @@ export default class SchedulesController {
 
       await trx.commit();
 
+      console.log('Agendamento atualizado com sucesso');
       return response.send('Agendamento atualizado com sucesso');
     } catch (err) {
       return response.json({ error: err });

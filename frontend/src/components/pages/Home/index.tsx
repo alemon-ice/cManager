@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   const [getCurrentDate, setCurrentDate] = useState<Date>();
   const [getTitleDate, setTitleDate] = useState('');
   const [getIsModalVisible, setIsModalVisible] = useState(false);
-  const [getSchedulingId, setSchedulingId] = useState<number>();
+  const [getSchedulingItem, setSchedulingItem] = useState<ScheduleData>();
 
   const formatMonth = (month: string) => {
     switch (month) {
@@ -95,7 +95,7 @@ const Home: React.FC = () => {
       if (!scheduleId) {
         await api.post('schedules', scheduleData);
       } else {
-        // api.put(`schedules/${scheduleId}`, schedule); FIXME resolver problema no backend
+        api.put(`schedules/${scheduleId}`, scheduleData);
 
         const updatedSchedule = data?.map(schedule => {
           if (schedule.id === scheduleId) {
@@ -130,8 +130,8 @@ const Home: React.FC = () => {
     console.log(`tarefa de ID ${id} concluída`);
   }
 
-  const handleEditSchedule = (id?: number) => {
-    id && setSchedulingId(id);
+  const handleEditSchedule = (schedule?: ScheduleData) => {
+    schedule && setSchedulingItem(schedule);
     setIsModalVisible(!getIsModalVisible);
   }
 
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
 
       <CircularButton icon="add" onClick={handleAddSchedule} />
       {
-        getIsModalVisible && <Modal title="Novo agendamento" content={<SchedulingRegisterForm setIsModalVisible={setIsModalVisible} currentDate={getFormatedDate} scheduleId={getSchedulingId} handleAddScheduling={handleAddScheduling} />} setIsModalVisible={setIsModalVisible} />
+        getIsModalVisible && <Modal title="Novo agendamento" content={<SchedulingRegisterForm currentDate={getFormatedDate} scheduleItem={getSchedulingItem} handleAddScheduling={handleAddScheduling} />} setIsModalVisible={setIsModalVisible} />
       }
     </>
   );

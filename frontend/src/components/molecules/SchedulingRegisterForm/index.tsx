@@ -8,13 +8,12 @@ import { Container } from './styles';
 import { ScheduleData, ScheduleDataSent } from 'models/ScheduleModels';
 
 interface SchedulingRegisterFormProps {
-  scheduleId?: number;
+  scheduleItem?: ScheduleData;
   currentDate?: string;
-  setIsModalVisible: (value: boolean) => void;
   handleAddScheduling: (scheduleData: ScheduleDataSent, scheduleId?: number) => void;
 }
 
-const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ scheduleId, currentDate, setIsModalVisible, handleAddScheduling }) => {
+const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ scheduleItem, currentDate, handleAddScheduling }) => {
   const [getScheduleData, setScheduleData] = useState<ScheduleData>();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -32,11 +31,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
   }
 
   useEffect(() => {
-    const getScheduleData = async () => {
-      const scheduleData = await api.get(`schedules/${scheduleId}`);
-      setScheduleData(scheduleData.data);
-    }
-    scheduleId && getScheduleData();
+    scheduleItem && setScheduleData(scheduleItem);
     if (currentDate) {
       const splitDate = handleSplitDate(currentDate);
 
@@ -72,7 +67,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
       end_time,
       is_important,
     }
-    handleAddScheduling(schedule, scheduleId);
+    handleAddScheduling(schedule, scheduleItem?.id);
   }
 
   return (

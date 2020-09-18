@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
+import { BsThreeDots } from 'react-icons/bs';
 
 import { Container, InitialData, Details } from './styles';
 import { Button } from 'components/atoms';
-
-import addSvg from 'assets/images/icons/black-add.svg';
 
 import { ScheduleData } from 'models/ScheduleModels';
 
@@ -46,7 +46,7 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
           </div>
           <div>
             <button type="button" onClick={() => showDetails()}>
-              <img src={addSvg} alt="Novo agendamento" /> {/* FIXME ícone provisório */}
+              <BsThreeDots size={25} />
             </button>
           </div>
         </InitialData>
@@ -64,8 +64,12 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
                     ? <Button styleButton="primary" onClick={() => handleCompleteSchedule(getSchedule?.id)}>Concluir</Button>
                     : <Button styleButton="primary" disabled value="disable">Concluído</Button>
                 }
-                <Button styleButton="secondary" onClick={() => handleEditSchedule(getSchedule)}>Editar</Button>
-                <Button styleButton="danger" onClick={() => handleDeleteSchedule(getSchedule?.id)}>Excluir</Button>
+                <Button styleButton="primary" onClick={() => handleEditSchedule(getSchedule)}>
+                  <AiOutlineEdit size={20} />
+                </Button>
+                <Button styleButton="danger" onClick={() => handleDeleteSchedule(getSchedule?.id)}>
+                  <AiOutlineDelete size={20} />
+                </Button>
               </div>
             </Details>
           )

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Background = styled.div`
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
 
   width: 100%;
   height: 100%;
@@ -23,11 +23,10 @@ export const Background = styled.div`
     color: #FFF;
     font-size: 1.2rem;
 
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
 
-    border: 0.5px solid #FFF;
-    border-radius: 12px;
+    border: none;
   }
 
   @media (max-width: 600px) {

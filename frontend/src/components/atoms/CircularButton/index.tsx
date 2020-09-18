@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FiPlus } from 'react-icons/fi';
 
 import { CircularButtonProps } from 'models/CircularButtonModels';
 import addSvg from 'assets/images/icons/add.svg';
@@ -12,7 +13,7 @@ const CircularButton: React.FC<CircularButtonProps> = ({
 
   useEffect(() => {
     if (icon === 'add') {
-      setChildren(<img src={addSvg} alt="Novo agendamento" />);
+      setChildren(<FiPlus size={25} />);
     }
   }, [icon]);
 

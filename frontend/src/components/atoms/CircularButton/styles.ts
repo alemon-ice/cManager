@@ -25,10 +25,6 @@ export const Button = styled.button`
     cursor: pointer;
   }
 
-  img {
-    max-width: 25px;
-  }
-
   position: fixed;
   right: 25px;
   bottom: 25px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { Background, Container, Header, Body, Footer } from './styles';
 import { Button } from 'components/atoms';
@@ -9,7 +10,7 @@ const Modal: React.FC<ModalProps> = ({ title, content, setIsModalVisible }) => {
   return (
     <Background>
       <button className="close-modal" onClick={() => setIsModalVisible(false)}>
-        X{/* FIXME icone provisório */}
+        <AiOutlineCloseCircle size={30} />
       </button>
       <Container>
         <Header>

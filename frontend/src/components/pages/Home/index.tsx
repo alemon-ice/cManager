@@ -109,9 +109,9 @@ const Home: React.FC = () => {
       }
 
       setIsModalVisible(false);
-      alert('Agendamento salvo com sucesso.');  // FIXME criar mensagem estilizada
+      alert('Agendamento salvo com sucesso.');  // FIXME personalizar mensagem
     } catch (err) {
-      alert('Erro no seridor.');  // FIXME criar mensagem estilizada
+      alert('Erro no servidor.');  // FIXME personalizar mensagem
       console.log(err);
     }
   }
@@ -127,7 +127,25 @@ const Home: React.FC = () => {
   };
 
   const handleCompleteSchedule = (id?: number) => {
-    console.log(`tarefa de ID ${id} concluída`);
+
+    try {
+      api.patch(`schedules/${id}`, { is_completed: true });
+
+      const updatedSchedule = data?.map(schedule => {
+        if (schedule.id === id) {
+          return { ...schedule, is_completed: true }
+        }
+
+        return schedule;
+      });
+
+      mutate(updatedSchedule, false);
+
+      alert('Agendamento concluído com sucesso.');  // FIXME personalizar mensagem
+    } catch (err) {
+      alert('Erro no servidor'); // FIXME personalizar mensagem
+      console.log(err);
+    }
   }
 
   const handleEditSchedule = (schedule?: ScheduleData) => {
@@ -136,19 +154,23 @@ const Home: React.FC = () => {
   }
 
   const handleDeleteSchedule = (id?: number) => {
-    const response = window.confirm('Deseja mesmo excluir este agendamento?');
-    console.log(response);
+    const response = window.confirm('Deseja mesmo excluir este agendamento?'); // FIXME personalizar mensagem
 
     if (response) {
-      api.delete(`schedules/${id}`);
+      try {
+        api.delete(`schedules/${id}`);
 
-      const updatedSchedulesList = data?.filter(schedule => {
-        if (schedule.id !== id) {
-          return schedule;
-        }
-      });
+        const updatedSchedulesList = data?.filter(schedule => {
+          if (schedule.id !== id) {
+            return schedule;
+          }
+        });
 
-      mutate(updatedSchedulesList, false);
+        mutate(updatedSchedulesList, false);
+      } catch (err) {
+        alert('Erro no servidor');
+        console.log(err);
+      }
     }
   }
 

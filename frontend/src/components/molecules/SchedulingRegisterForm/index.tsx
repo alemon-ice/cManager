@@ -1,7 +1,5 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 
-import api from 'services/api';
-
 import { Input, Textarea, DateInput, TimeInput } from 'components/atoms';
 import { Container } from './styles';
 
@@ -22,6 +20,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
   const [year, setYear] = useState('');
   const [start_time, setStartTime] = useState('');
   const [end_time, setEndTime] = useState('');
+  const [is_completed, setIsCompleted] = useState<boolean>(false);
   const [is_important, setIsImportant] = useState<boolean>(false);
 
   const handleSplitDate = (date: string) => {
@@ -52,6 +51,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
       setYear(splitDate[0]);
       setStartTime(getScheduleData.start_time);
       setEndTime(getScheduleData.end_time);
+      setIsCompleted(!!getScheduleData.is_completed);
       setIsImportant(!!getScheduleData.is_important);
     }
   }, [getScheduleData]);
@@ -65,6 +65,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
       date: `${year}-${month}-${day}`,
       start_time,
       end_time,
+      is_completed,
       is_important,
     }
     handleAddScheduling(schedule, scheduleItem?.id);

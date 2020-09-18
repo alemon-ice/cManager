@@ -59,7 +59,11 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
                   : <p>Não possui descrição.</p>
               }
               <div>
-                <Button styleButton="primary" onClick={() => handleCompleteSchedule(getSchedule?.id)}>Concluída</Button>
+                {
+                  !getSchedule?.is_completed
+                    ? <Button styleButton="primary" onClick={() => handleCompleteSchedule(getSchedule?.id)}>Concluir</Button>
+                    : <Button styleButton="primary" disabled value="disable">Concluído</Button>
+                }
                 <Button styleButton="secondary" onClick={() => handleEditSchedule(getSchedule)}>Editar</Button>
                 <Button styleButton="danger" onClick={() => handleDeleteSchedule(getSchedule?.id)}>Excluir</Button>
               </div>

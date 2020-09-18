@@ -8,6 +8,7 @@ export async function up(knex: Knex): Promise<void> {
     table.date('date').notNullable();
     table.time('start_time').notNullable();
     table.time('end_time').notNullable();
+    table.boolean('is_completed').defaultTo(false).notNullable();
     table.boolean('is_important').defaultTo(false).notNullable();
   });
 }

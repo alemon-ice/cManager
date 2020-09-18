@@ -37,9 +37,9 @@ export default class SchedulesController {
       date,
       start_time,
       end_time,
+      is_completed,
       is_important,
     } = request.body;
-    console.log(request.body);
 
     const trx = await connection.transaction();
 
@@ -102,6 +102,7 @@ export default class SchedulesController {
       date,
       start_time,
       end_time,
+      is_completed,
       is_important,
     };
 
@@ -112,6 +113,7 @@ export default class SchedulesController {
 
       return response.send('Agendamento criado com sucesso.');
     } catch (err) {
+      console.log(err);
       return response.send({ error: err });
     }
   };
@@ -124,6 +126,7 @@ export default class SchedulesController {
       date,
       start_time,
       end_time,
+      is_completed,
       is_important,
     } = request.body;
 
@@ -189,6 +192,7 @@ export default class SchedulesController {
       date,
       start_time,
       end_time,
+      is_completed,
       is_important,
     };
 
@@ -197,9 +201,35 @@ export default class SchedulesController {
 
       await trx.commit();
 
-      console.log('Agendamento atualizado com sucesso');
       return response.send('Agendamento atualizado com sucesso');
     } catch (err) {
+      return response.json({ error: err });
+    }
+  };
+
+  completeTask = async (
+    request: Request,
+    response: Response,
+  ): Promise<Response> => {
+    const { id } = request.params;
+    const { is_completed } = request.body;
+
+    const trx = await connection.transaction();
+
+    const checkIdExists = await trx('schedules').where({ id }).first();
+
+    if (!checkIdExists) {
+      await trx.rollback();
+      return response.send('O ID informado não existe na tabela.');
+    }
+
+    try {
+      await trx('schedules').update({ is_completed }).where({ id });
+
+      await trx.commit();
+      return response.send('Agendamento atualizado com sucesso.');
+    } catch (err) {
+      console.log(err);
       return response.json({ error: err });
     }
   };

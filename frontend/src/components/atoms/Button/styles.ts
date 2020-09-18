@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
+import { lighten, shade } from 'polished';
 
 export const StyledButton = styled.button`
   &.default {
@@ -41,5 +41,9 @@ export const StyledButton = styled.button`
     background: ${(props) => props.theme.colors.danger};
     color: ${(props) => props.theme.colors.lightText};
     border: 0;
+  }
+
+  &.disabled {
+    background: ${(props) => shade(0.2, props.theme.colors.primary)};
   }
 `;

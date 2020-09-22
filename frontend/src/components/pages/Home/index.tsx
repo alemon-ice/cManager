@@ -18,6 +18,7 @@ const Home: React.FC = () => {
   const [getTitleDate, setTitleDate] = useState('');
   const [getIsModalVisible, setIsModalVisible] = useState(false);
   const [getSchedulingItem, setSchedulingItem] = useState<ScheduleData>();
+  const [getResponseMessage, setResponseMessage] = useState<{ status: string, message: string }>();
 
   const formatMonth = (month: string) => {
     switch (month) {
@@ -88,14 +89,22 @@ const Home: React.FC = () => {
       : setContent(<div className="message"><p>Carregando agendamentos...</p></div>)
   }, [data]);
 
+  useEffect(() => {
+    getResponseMessage?.status === 'success' && setIsModalVisible(false);
+    getResponseMessage && alert(getResponseMessage.message);
+  }, [getResponseMessage]);
+
   const handleAddScheduling = async (scheduleData: ScheduleDataSent, scheduleId?: number) => {
 
     try {
 
       if (!scheduleId) {
-        await api.post('schedules', scheduleData);
+        const response = await api.post('schedules', scheduleData);
+        setResponseMessage(response.data);
       } else {
-        api.put(`schedules/${scheduleId}`, scheduleData);
+        const response = await api.put(`schedules/${scheduleId}`, scheduleData);
+        console.log(response);
+        setResponseMessage(response.data);
 
         const updatedSchedule = data?.map(schedule => {
           if (schedule.id === scheduleId) {
@@ -107,11 +116,8 @@ const Home: React.FC = () => {
 
         mutate(updatedSchedule, false);
       }
-
-      setIsModalVisible(false);
-      alert('Agendamento salvo com sucesso.');  // FIXME personalizar mensagem
     } catch (err) {
-      alert('Erro no servidor.');  // FIXME personalizar mensagem
+      alert('Erro ao salvar, tente novamente.');
       console.log(err);
     }
   }
@@ -141,9 +147,9 @@ const Home: React.FC = () => {
 
       mutate(updatedSchedule, false);
 
-      alert('Agendamento concluído com sucesso.');  // FIXME personalizar mensagem
+      alert('Agendamento concluído com sucesso.');
     } catch (err) {
-      alert('Erro no servidor'); // FIXME personalizar mensagem
+      alert('Erro no servidor');
       console.log(err);
     }
   }
@@ -154,7 +160,7 @@ const Home: React.FC = () => {
   }
 
   const handleDeleteSchedule = (id?: number) => {
-    const response = window.confirm('Deseja mesmo excluir este agendamento?'); // FIXME personalizar mensagem
+    const response = window.confirm('Deseja mesmo excluir este agendamento?');
 
     if (response) {
       try {
@@ -167,6 +173,8 @@ const Home: React.FC = () => {
         });
 
         mutate(updatedSchedulesList, false);
+
+        alert('Agendamento excluído com sucesso.');
       } catch (err) {
         alert('Erro no servidor');
         console.log(err);

@@ -24,7 +24,7 @@ export default class SchedulesController {
 
     if (!checkIdExists) {
       await trx.rollback();
-      return response.send('ID não encontrado.');
+      return response.status(400).send('ID não encontrado.');
     }
 
     return response.json(checkIdExists);
@@ -48,9 +48,10 @@ export default class SchedulesController {
 
     if (isPast(scheduleStartDateTime)) {
       await trx.rollback();
-      return response.send(
-        'A data definida já passou e não pode ser selecidonada.',
-      );
+      return response.json({
+        status: 'error',
+        message: 'A data/hora definida já passou e não pode ser selecidonada.',
+      });
     }
 
     const schedulesOnDate = await trx('schedules')
@@ -92,7 +93,10 @@ export default class SchedulesController {
 
       if (timeIsValid) {
         await trx.rollback();
-        return response.send('Já existe um agendamento para este horário.');
+        return response.json({
+          status: 'error',
+          message: 'Já existe um agendamento para este horário.',
+        });
       }
     }
 
@@ -111,10 +115,12 @@ export default class SchedulesController {
 
       await trx.commit();
 
-      return response.send('Agendamento criado com sucesso.');
+      return response.json({
+        status: 'success',
+        message: 'Agendamento criado com sucesso.',
+      });
     } catch (err) {
-      console.log(err);
-      return response.send({ error: err });
+      return response.json({ error: err });
     }
   };
 
@@ -137,9 +143,10 @@ export default class SchedulesController {
 
     if (isPast(scheduleStartDateTime)) {
       await trx.rollback();
-      return response.send(
-        'A data definida já passou e não pode ser selecidonada.',
-      );
+      return response.json({
+        status: 'error',
+        message: 'A data/hora definida já passou e não pode ser selecidonada.',
+      });
     }
 
     const schedulesOnDate = await trx('schedules')
@@ -182,7 +189,10 @@ export default class SchedulesController {
 
       if (timeIsValid) {
         await trx.rollback();
-        return response.send('Já existe um agendamento para este horário.');
+        return response.json({
+          status: 'error',
+          message: 'Já existe um agendamento para este horário.',
+        });
       }
     }
 
@@ -201,7 +211,10 @@ export default class SchedulesController {
 
       await trx.commit();
 
-      return response.send('Agendamento atualizado com sucesso');
+      return response.json({
+        status: 'success',
+        message: 'Agendamento atualizado com sucesso.',
+      });
     } catch (err) {
       return response.json({ error: err });
     }
@@ -220,16 +233,18 @@ export default class SchedulesController {
 
     if (!checkIdExists) {
       await trx.rollback();
-      return response.send('O ID informado não existe na tabela.');
+      return response.status(400).send('ID não encontrado.');
     }
 
     try {
       await trx('schedules').update({ is_completed }).where({ id });
 
       await trx.commit();
-      return response.send('Agendamento atualizado com sucesso.');
+      return response.json({
+        status: 'success',
+        message: 'Agendamento atualizado com sucesso.',
+      });
     } catch (err) {
-      console.log(err);
       return response.json({ error: err });
     }
   };
@@ -243,14 +258,17 @@ export default class SchedulesController {
 
     if (!checkIdExists) {
       await trx.rollback();
-      return response.send('O ID informado não existe na tabela.');
+      return response.status(400).send('ID não encontrado.');
     }
 
     try {
       await trx('schedules').where({ id }).del();
 
       await trx.commit();
-      return response.send('Agendamento deletado com sucesso.');
+      return response.json({
+        status: 'success',
+        message: 'Agendamento deletado com sucesso.',
+      });
     } catch (err) {
       return response.json({ error: err });
     }

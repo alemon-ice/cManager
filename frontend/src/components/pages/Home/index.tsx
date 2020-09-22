@@ -50,7 +50,7 @@ const Home: React.FC = () => {
 
   const { data, mutate } = useFetch<ScheduleData[]>(`schedules?date=${getFormatedDate}`);
 
-  const formatCurrentDate = (date: Date) => {
+  const handleFormatDate = (date: Date) => {
     setCurrentDate(date);
 
     const day = date.getDate().toString();
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const currentDate = new Date();
-    const formatedCurrentDate = formatCurrentDate(currentDate);
+    const formatedCurrentDate = handleFormatDate(currentDate);
 
     setFormatedDate(formatedCurrentDate);
   }, []);
@@ -117,7 +117,7 @@ const Home: React.FC = () => {
   }
 
   const selectDate = (date: any) => {
-    const formatedDate = formatCurrentDate(date);
+    const formatedDate = handleFormatDate(date);
 
     setFormatedDate(formatedDate);
   }

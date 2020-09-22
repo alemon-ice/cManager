@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
+import { parseISO, isPast } from 'date-fns';
+import { AiOutlineEdit, AiOutlineDelete, AiOutlinePushpin } from 'react-icons/ai';
+import { BsThreeDots, BsExclamationCircle, BsCheckCircle } from 'react-icons/bs';
 
 import { Container, InitialData, Details } from './styles';
 import { Button } from 'components/atoms';
@@ -22,6 +23,50 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
 }) => {
   const [getSchedule, setSchedule] = useState<ScheduleData>();
   const [getShowDetails, setShowDetails] = useState<boolean>(false);
+  const [getScheduleStatus, setScheduleStatus] = useState<
+    { status: string; message: JSX.Element } | undefined
+  >();
+  const [sizeButtonIcon, _] = useState(25);
+  const [getButtonIcon, setButtonIcon] = useState(<BsThreeDots size={sizeButtonIcon} />);
+
+  const statusMessages = {
+    isLateMessage: <p
+      style={{
+        textAlign: 'center', color: '#F00', paddingBottom: '6%'
+      }}
+    >
+      O agendamento está atrasado!
+      </p>,
+    isCompletedMessage: <p
+      style={{
+        textAlign: 'center', color: '#0F0', paddingBottom: '6%'
+      }}
+    >
+      O agendamento foi concluído!
+      </p>
+  }
+
+  useEffect(() => {
+    if (itemData.is_completed) {
+      setScheduleStatus({
+        status: 'is-completed',
+        message: statusMessages.isCompletedMessage,
+      });
+      setButtonIcon(<BsCheckCircle size={sizeButtonIcon} style={{ color: '#0F0' }} />);
+    } else if (itemData.is_important) {
+      setButtonIcon(<AiOutlinePushpin size={sizeButtonIcon} />);
+    } else {
+      const scheduleStartDateTime = parseISO(`${itemData.date}T${itemData.start_time}`);
+
+      if (isPast(scheduleStartDateTime)) {
+        setScheduleStatus({
+          status: 'is-late',
+          message: statusMessages.isLateMessage,
+        });
+        setButtonIcon(<BsExclamationCircle size={sizeButtonIcon} style={{ color: '#F00' }} />);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     itemData && setSchedule(itemData);
@@ -31,9 +76,18 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
     setShowDetails(!getShowDetails);
   }
 
+  const completeSchedule = () => {
+    setScheduleStatus({
+      status: 'is-completed',
+      message: statusMessages.isCompletedMessage,
+    });
+    handleCompleteSchedule(getSchedule?.id);
+    setButtonIcon(<BsCheckCircle size={sizeButtonIcon} style={{ color: '#0F0' }} />);
+  }
+
   return (
     <>
-      <Container>
+      <Container className={getScheduleStatus?.status}>
         <InitialData>
           <div>
             <div>
@@ -46,22 +100,23 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
           </div>
           <div>
             <button type="button" onClick={() => showDetails()}>
-              <BsThreeDots size={25} />
+              {getButtonIcon}
             </button>
           </div>
         </InitialData>
+        {getScheduleStatus && getScheduleStatus.message}
         {
           getShowDetails && (
             <Details>
               {
                 getSchedule?.description
-                  ? <p>{getSchedule?.description}</p>
+                  ? <p><strong>Descrição:</strong> {getSchedule?.description}</p>
                   : <p>Não possui descrição.</p>
               }
               <div>
                 {
                   !getSchedule?.is_completed
-                    ? <Button styleButton="primary" onClick={() => handleCompleteSchedule(getSchedule?.id)}>Concluir</Button>
+                    ? <Button styleButton="primary" onClick={() => completeSchedule()}>Concluir</Button>
                     : <Button styleButton="primary" disabled value="disable">Concluído</Button>
                 }
                 <Button styleButton="primary" onClick={() => handleEditSchedule(getSchedule)}>

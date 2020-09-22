@@ -82,6 +82,7 @@ export const InitialData = styled.div`
   @media (max-width: 600px) {
     &:first-child {
       margin-top: 3%;
+      margin-bottom: 0;
     }
     margin-bottom: 3%;
   }

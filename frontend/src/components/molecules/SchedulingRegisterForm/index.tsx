@@ -36,10 +36,6 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
   }
 
   useEffect(() => {
-    console.log(is_important);
-  }, [is_important]);
-
-  useEffect(() => {
     scheduleItem && setScheduleData(scheduleItem);
     if (currentDate) {
       const splitDate = handleSplitDate(currentDate);
@@ -78,7 +74,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
       is_completed,
       is_important,
     }
-    console.log(schedule);
+
     handleAddScheduling(schedule, scheduleItem?.id);
   }
 

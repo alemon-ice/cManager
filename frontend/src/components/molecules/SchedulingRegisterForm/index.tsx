@@ -1,6 +1,12 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 
-import { Input, Textarea, DateInput, TimeInput } from 'components/atoms';
+import {
+  Input,
+  Textarea,
+  DateInput,
+  TimeInput,
+  Checkbox,
+} from 'components/atoms';
 import { Container } from './styles';
 
 import { ScheduleData, ScheduleDataSent } from 'models/ScheduleModels';
@@ -28,6 +34,10 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
 
     return splitDate;
   }
+
+  useEffect(() => {
+    console.log(is_important);
+  }, [is_important]);
 
   useEffect(() => {
     scheduleItem && setScheduleData(scheduleItem);
@@ -68,6 +78,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
       is_completed,
       is_important,
     }
+    console.log(schedule);
     handleAddScheduling(schedule, scheduleItem?.id);
   }
 
@@ -106,6 +117,12 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
           valueInputEndTime={end_time}
           onChangeStartTime={e => setStartTime(e.target.value)}
           onChangeEndTime={e => setEndTime(e.target.value)}
+        />
+        <Checkbox
+          name="is_important"
+          label="Marcar como importante"
+          valueIsImportant={is_important}
+          setIsImportant={setIsImportant}
         />
       </form>
     </Container>

@@ -38,7 +38,7 @@ export const Container = styled.div`
 
   .end-time-label {
     margin-left: 1rem;
-    width: calc(60px - 2rem);
+    width: calc(70px - 2rem);
   }
 
   @media (max-width: 600px) {

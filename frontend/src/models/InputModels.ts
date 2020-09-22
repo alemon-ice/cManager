@@ -30,3 +30,10 @@ export interface TimeInputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChangeStartTime: (e: any) => void;
   onChangeEndTime: (e: any) => void;
 }
+
+export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  label: string;
+  valueIsImportant: boolean;
+  setIsImportant: (e: any) => void;
+}

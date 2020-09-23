@@ -87,6 +87,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
           placeholder="Adicione um título"
           value={title}
           onChange={e => setTitle(e.target.value)}
+          autoComplete="off"
           required
         />
         <Textarea
@@ -105,6 +106,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
           onChangeDay={e => setDay(e.target.value)}
           onChangeMonth={e => setMonth(e.target.value)}
           onChangeYear={e => setYear(e.target.value)}
+          autoComplete="off"
           required
         />
         <TimeInput
@@ -115,6 +117,7 @@ const SchedulingRegisterForm: React.FC<SchedulingRegisterFormProps> = ({ schedul
           valueInputEndTime={end_time}
           onChangeStartTime={e => setStartTime(e.target.value)}
           onChangeEndTime={e => setEndTime(e.target.value)}
+          autoComplete="off"
           required
         />
         <Checkbox

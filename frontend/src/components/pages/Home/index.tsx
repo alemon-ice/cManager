@@ -103,7 +103,6 @@ const Home: React.FC = () => {
         setResponseMessage(response.data);
       } else {
         const response = await api.put(`schedules/${scheduleId}`, scheduleData);
-        console.log(response);
         setResponseMessage(response.data);
 
         const updatedSchedule = data?.map(schedule => {

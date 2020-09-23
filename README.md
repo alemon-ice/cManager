@@ -16,13 +16,17 @@
   <a href="#computer-iniciar-o-front-end">Frontend</a>
 </p>
 
+<div align="center">
+  <img src="./github/web-version.gif" alt="Demonstração da aplicação" height="400">
+</div>
+
 ## :page_with_curl: Sobre
 
-O cManager nada mais é que uma plataforma de agendamentos que pode ser utilizado por qualquer pessoa.
+O cManager nada mais é que uma plataforma web de agendamentos que pode ser utilizado por qualquer pessoa.
 
-Nesta aplicação o usuário pode agendar tarefas/compromissos e ter uma visualização de seus agendamentos em forma de calendário e agenda, além de poder editar ou excluir seus agendamentos.
+Nesta aplicação o usuário pode agendar tarefas/compromissos para qualquer data e ter uma visão geral de seus agendamentos, além de poder editar ou excluir cada item.
 
-O cManager é uma aplicação web com layout responsivo, permitindo que seja acessado via celular ou computador sem afetar a experiência do usuário.
+O cManager é uma aplicação web com layout responsivo, permitindo que seja acessado pelo celular ou computador sem afetar a experiência do usuário.
 
 ### Features
 
@@ -32,7 +36,6 @@ O cManager é uma aplicação web com layout responsivo, permitindo que seja ace
 - [x] Exclusão de agendamentos
 - [ ] Tarefas diárias
 - [ ] Autenticação
-
 
 ## 🛠 Tecnologias
 
@@ -90,6 +93,6 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
 
 ## 📝 Licença
 
-Este projeto esta sobe a licença MIT.
+Este projeto está sob a licença MIT.
 
 Feito com ❤️ por Rafael Dias 👋🏻 [Get in touch!](https://github.com/alemon-ice)

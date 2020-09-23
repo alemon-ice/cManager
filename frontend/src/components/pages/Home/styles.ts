@@ -11,7 +11,8 @@ export const Container = styled.div`
   min-width: 100%;
   min-height: 100%;
 
-  padding: 3%;
+  padding: 6vh 4vw;
+  /* padding: 3%; */
 
   @media (max-width: 900px) {
     & {
@@ -29,8 +30,6 @@ export const Container = styled.div`
 `;
 
 export const CalendarContainer = styled.div`
-  max-height: 100%;
-
   border-radius: 12px;
   box-shadow: 1px 1.5px #CCC;
 

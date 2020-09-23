@@ -23,6 +23,9 @@ export const ScheduleHeader = styled.div`
 `;
 
 export const ScheduleList = styled.div`
+  overflow: auto;
+
+  height: 74vh;
   display: flex;
   flex-direction: column;
 

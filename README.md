@@ -87,4 +87,9 @@ Além disto é bom ter um editor para trabalhar com o código como [VSCode](http
   $ npm run start
 ```
 
+
+## 📝 Licença
+
+Este projeto esta sobe a licença MIT.
+
 Feito com ❤️ por Rafael Dias 👋🏻 [Get in touch!](https://github.com/alemon-ice)

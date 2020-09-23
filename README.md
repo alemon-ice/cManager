@@ -18,7 +18,10 @@
 
 ## :page_with_curl: Sobre
 
-O cManager nada mais é que uma plataforma de agendamentos que pode ser utilizado por qualquer pessoa. Nessa aplicação o usuário pode agendar tarefas/compromissos e ter uma visualização de seus agendamentos em forma de calendário e agenda, além de poder editar ou excluir seus agendamentos.
+O cManager nada mais é que uma plataforma de agendamentos que pode ser utilizado por qualquer pessoa.
+
+Nesta aplicação o usuário pode agendar tarefas/compromissos e ter uma visualização de seus agendamentos em forma de calendário e agenda, além de poder editar ou excluir seus agendamentos.
+
 O cManager é uma aplicação web com layout responsivo, permitindo que seja acessado via celular ou computador sem afetar a experiência do usuário.
 
 ### Features

@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   const [getCurrentDate, setCurrentDate] = useState<Date>();
   const [getTitleDate, setTitleDate] = useState('');
   const [getIsModalVisible, setIsModalVisible] = useState(false);
-  const [getSchedulingItem, setSchedulingItem] = useState<ScheduleData>();
+  const [getSchedulingItem, setSchedulingItem] = useState<ScheduleData | null>();
   const [getResponseMessage, setResponseMessage] = useState<{ status: string, message: string }>();
 
   const formatMonth = (month: string) => {
@@ -90,7 +90,10 @@ const Home: React.FC = () => {
   }, [data]);
 
   useEffect(() => {
-    getResponseMessage?.status === 'success' && setIsModalVisible(false);
+    if (getResponseMessage?.status === 'success') {
+      setSchedulingItem(null);
+      setIsModalVisible(false);
+    }
     getResponseMessage && alert(getResponseMessage.message);
   }, [getResponseMessage]);
 

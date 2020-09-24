@@ -12,7 +12,7 @@ import { Container } from './styles';
 import { ScheduleData, ScheduleDataSent } from 'models/ScheduleModels';
 
 interface SchedulingRegisterFormProps {
-  scheduleItem?: ScheduleData;
+  scheduleItem?: ScheduleData | null;
   currentDate?: string;
   handleAddScheduling: (scheduleData: ScheduleDataSent, scheduleId?: number) => void;
 }

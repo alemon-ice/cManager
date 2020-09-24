@@ -4,9 +4,9 @@
 
 <h1 align="center">cManager</h1>
 
-<h4 align="center"> 
-	🚧  Frontend em construção...  🚧
-</h4>
+<h2 align="center">
+	🚧  Work in progress...  🚧
+</h2>
 
 <p align="center">
   <a href="#page_with_curl-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -16,13 +16,21 @@
   <a href="#computer-iniciar-o-front-end">Frontend</a>
 </p>
 
+<br />
+
+<h2 align="center">:computer: visualização pelo computador</h2>
 <div align="center">
   <img src="./github/web-version.gif" alt="Demonstração da aplicação" height="400">
 </div>
 
+<h2 align="center">:iphone: Visualização pelo celular</h2>
+<div align="center">
+  <img src="./github/mobile-version.gif" alt="Demonstração da aplicação" height="400">
+</div>
+
 ## :page_with_curl: Sobre
 
-O cManager nada mais é que uma plataforma web de agendamentos que pode ser utilizado por qualquer pessoa.
+CManager nada mais é que uma plataforma web de agendamentos que pode ser utilizado por qualquer pessoa.
 
 Nesta aplicação o usuário pode agendar tarefas/compromissos para qualquer data e ter uma visão geral de seus agendamentos, além de poder editar ou excluir cada item.
 
@@ -35,9 +43,10 @@ O cManager é uma aplicação web com layout responsivo, permitindo que seja ace
 - [x] Edição de agendamento
 - [x] Exclusão de agendamentos
 - [ ] Tarefas diárias
+- [ ] Lista de tarefas
 - [ ] Autenticação
 
-## 🛠 Tecnologias
+## :wrench: Tecnologias
 
 Tecnologias utilizadas na construção do projeto:
 
@@ -47,14 +56,14 @@ Tecnologias utilizadas na construção do projeto:
 - [Knex.js](https://knexjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-### :books: Requisitos
+### Requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/).
 
 
-## :gear: Clonar o repositório
+## :open_file_folder: Clonar o repositório
 ``` bash
   # Clonar o projeto:
   $ git clone https://github.com/alemon-ice/cManager.git

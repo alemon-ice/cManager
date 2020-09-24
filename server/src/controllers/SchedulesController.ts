@@ -7,7 +7,10 @@ export default class SchedulesController {
   index = async (request: Request, response: Response): Promise<Response> => {
     const { date } = request.query;
 
-    const schedules = await connection('schedules').where({ date }).select('*');
+    const schedules = await connection('schedules')
+      .where({ date })
+      .select('*')
+      .orderBy('start_time');
 
     return response.json(schedules);
   };
@@ -175,7 +178,7 @@ export default class SchedulesController {
               isBefore(scheduleEndDateTime, existingScheduleEndDateTime)) ||
             (isBefore(scheduleStartDateTime, existingScheduleStartDateTime) &&
               isAfter(scheduleEndDateTime, existingScheduleEndDateTime))) &&
-          schedule.id !== id
+          schedule.id.toString() !== id
         ) {
           return true;
         }

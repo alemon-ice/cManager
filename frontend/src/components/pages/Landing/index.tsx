@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
+
 import { Button } from 'components/atoms';
 
 import homePage from '../../../assets/images/panel.jpeg';

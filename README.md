@@ -18,7 +18,12 @@
 
 <br />
 
-<h2 align="center">:computer: visualização pelo computador</h2>
+<h2 align="center">Página inicial</h2>
+<div align="center">
+  <img src="./github/landing.png" alt="Página inicial" height="400">
+</div>
+
+<h2 align="center">:computer: Visualização pelo computador</h2>
 <div align="center">
   <img src="./github/web-version.gif" alt="Demonstração da aplicação" height="400">
 </div>

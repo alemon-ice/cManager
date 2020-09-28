@@ -1,12 +1,49 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  @keyframes presentation-img {
+    from { transform: translateX(-1500px); }
+    to { transform: translateX(0px); }
+  }
+  @keyframes presentation-description {
+    from { transform: translateX(-1000px); }
+    to { transform: translateX(0px); }
+  }
+  @keyframes presentation-button {
+    from { transform: translateX(-500px); }
+    to { transform: translateX(0px); }
+  }
+
+  @keyframes home-page-img {
+    from {
+      transform: translateX(+300px);
+    }
+
+    to {
+      transform: translateX(0px);
+    }
+  }
+
   width: 100vw;
   min-height: 100vh;
 
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  .presentation > .content img {
+    animation: presentation-img 1.5s;
+  }
+  .presentation > .content .description {
+    animation: presentation-description 1.5s;
+  }
+  .presentation > .content button {
+    animation: presentation-button 1.5s;
+  }
+
+  .home-page > div img {
+    animation: home-page-img 1.5s;
+  }
 
   @media (max-width: 1024px) {
     height: 100%;

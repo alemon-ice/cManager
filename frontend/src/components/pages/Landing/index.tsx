@@ -5,15 +5,15 @@ import { Container } from './styles';
 
 import { Button } from 'components/atoms';
 
-import homePage from '../../../assets/images/panel.jpeg';
-import workingLate from '../../../assets/images/working-late.png';
+import homePage from '../../../assets/images/panel.svg';
+import calendarIcon from '../../../assets/images/calendar.svg';
 
 const landing: React.FC = () => {
   return (
     <Container>
       <div className="presentation">
         <div className="content">
-          <img src={workingLate} alt="Ilustração" />
+          <img src={calendarIcon} alt="Ilustração" />
 
           <div className="description">
             <h1>Bem-vindo ao cManager</h1>

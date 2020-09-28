@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
 export const Background = styled.div`
+  animation: transitionIn 1s;
+  @keyframes transitionIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
   background: rgba(0, 0, 0, 0.6);
 
   width: 100%;

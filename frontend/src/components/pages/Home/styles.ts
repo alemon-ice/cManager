@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  animation: transitionIn 1s;
+  @keyframes transitionIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
   display: grid;
   grid-template-columns: 6fr 3fr;
   grid-column-gap: 3%;
